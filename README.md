@@ -69,3 +69,12 @@ drawPoint(canvas, x, y, num, color, size) {
 ~~~ 
 
 
+##### Ordine import script
+> Nel file index.htm l'ultimo import dei file.js deve essere il main.js perché sennò cerca di generare le classi senza averle ancora importate.
+
+~~~ html
+  <script src="./script/models/point.js"></script>
+  <script src="./script/models/pencil.js"></script>
+  <script src="./script/main.js"></script>
+~~~
+
