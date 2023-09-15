@@ -68,6 +68,8 @@ class Point{
     var points = new Array();
 
 // on mouse click over canvas
-    canvas.addEventListener("mousedown",function(e){
+        // dblclick
+        // mousedown
+    canvas.addEventListener("dblclick",function(e){
         points.push(new Point(e, canvas, points.length));
     });

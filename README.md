@@ -47,6 +47,6 @@ drawPoint(canvas, x, y, num, color, size) {
 				canvasDrawed.fillText(num, textX, textY);
 		}
 }
-    ~~~ 
+~~~ 
 
 
