@@ -1,8 +1,6 @@
-// classe che rappresenta e disegna il puntino salvato nel array points
-
 class Point{
 
-    constructor(event, canvas, numPoint){
+    constructor(event, canvas, canvasDrawed, numPoint){
 
     // Coordinate globali click
         let eventX = event.clientX;
@@ -17,7 +15,7 @@ class Point{
         let y = this.getYClick(eventY, yCanvasTop);
 
     // disegno il puntino
-        this.drawPoint(canvas, x, y, numPoint + 1);
+        this.drawPoint(canvas, canvasDrawed, x, y, numPoint + 1);
     }
 
     // ritorna la posizione del puntino X
@@ -30,9 +28,8 @@ class Point{
         return yE - yC;
     }
 
-    drawPoint(canvas, x, y, num, color, size) {
-        // rendo disegnabile il canvas
-            var canvasDrawed = canvas.getContext('2d');
+    drawPoint(canvas,canvasDrawed ,x, y, num, color, size) {
+
         // se dati non inseriti
             if (color == null) {
                 color = '#000';
@@ -61,15 +58,11 @@ class Point{
     }
 }
 
-// canvas
-    let canvas = document.getElementById("canvas");
 
-// array con i puntini
-    var points = new Array();
 
 // on mouse click over canvas
         // dblclick
         // mousedown
     canvas.addEventListener("dblclick",function(e){
-        points.push(new Point(e, canvas, points.length));
+        points.push(new Point(e, canvas, canvasDrawed, points.length));
     });
