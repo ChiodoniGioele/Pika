@@ -27,7 +27,9 @@ class Rectangle{
             var width = mouseX - window.startX;
             var height = mouseY - window.startY;
             canvasDrawed.rect(window.startX, window.startY, width,height);
-            canvasDrawed.strokeStyle = 'black';
+            if(color){
+                canvasDrawed.strokeStyle = color;
+            }
             canvasDrawed.lineWidth = 10;
             canvasDrawed.stroke();
         }
@@ -48,6 +50,7 @@ var r = new Rectangle();
         // solo se CHECKBOX è selezionato puo iniziare a disegnare
         if(rectangleMode.checked){
             r.startDrawing(e, canvas, canvasDrawed);
+            // rects.push(new Rectangle());
         }
     });
 

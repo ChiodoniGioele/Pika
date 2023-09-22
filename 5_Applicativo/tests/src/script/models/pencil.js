@@ -44,8 +44,7 @@ class Pencil{
     }
 }
 
-
-
+let p = new Pencil(canvas);
 
         // event 
 // quando premuto start disegno
@@ -53,6 +52,7 @@ class Pencil{
         // solo se CHECKBOX è selezionato puo iniziare a disegnare
         if(pencilMode.checked){
             p.startDrawing(e, canvas, canvasDrawed);
+    //        lines.push(new Pencil(e, canvas, canvasDrawed));
         }
     });
 

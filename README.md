@@ -80,3 +80,91 @@ drawPoint(canvas, x, y, num, color, size) {
   <script src="./script/main.js"></script>
 ~~~
 
+
+##### Strumento rettangolo
+
+~~~ JavaScript
+    startDrawing(event, canvas, canvasDrawed){
+        canDraw = true;
+        let elementRect = canvas.getBoundingClientRect();
+        window.startX = event.clientX - elementRect.left;
+        window.startY = event.clientY - elementRect.top;
+
+		canvasDrawed.moveTo
+		(
+			event.clientX - elementRect.left, event.clientY - elementRect.top
+		);
+    }
+    
+    move(event, color, canDraw, canvasDrawed) {
+        let elementRect = canvas.getBoundingClientRect();
+        
+        let mouseX = event.clientX - elementRect.left;
+        let mouseY = event.clientY - elementRect.top;
+        
+        // se posso disegnare
+        if (canDraw) {
+            canvasDrawed.clearRect(0,0,canvas.width,canvas.height); //clear canvas
+            canvasDrawed.beginPath();
+            var width = mouseX - window.startX;
+            var height = mouseY - window.startY;
+            canvasDrawed.rect(window.startX, window.startY, width,height);
+            canvasDrawed.strokeStyle = 'black';
+            canvasDrawed.lineWidth = 10;
+            canvasDrawed.stroke();
+        }
+    }
+
+    end(){
+      return false;  
+    }
+~~~
+
+##### Strumento penna
+~~~ JavaScript
+    startDrawing(event, canvas, canvasDrawed) {
+        // da ora si puo disegnare
+            canDraw = true;
+        // definisce la nuova linea
+            this.setLineProperties(canvasDrawed);
+        // sposta la penna in x e y senza disegnare
+            canvasDrawed.beginPath();
+            let elementRect = canvas.getBoundingClientRect();
+            canvasDrawed.moveTo
+            (
+	            event.clientX - elementRect.left, event.clientY - elementRect.top
+            );
+    }
+
+    move(event, color, canDraw, canvasDrawed) {
+        // se posso disegnare
+        if (canDraw) {
+            let elementRect = event.target.getBoundingClientRect();
+            // traccia la riga in x y
+                canvasDrawed.lineTo
+                (
+	                event.clientX - elementRect.left, event.clientY - elementRect.top
+                );
+            // per modificare il colore
+                if(color){
+                    canvasDrawed.strokeStyle = color;
+                }
+            // disegna
+                canvasDrawed.stroke();
+        }
+    }
+
+    end(event, status) {
+        // non posso piu disegnare perchè non btn non premuto
+        if (event.button == status) {
+            return false;
+        }
+        return true;
+    }
+
+    // devinisce la linea
+    setLineProperties(canvasDrawed) {
+        canvasDrawed.lineWidth = 3;
+        return canvasDrawed;
+    }
+~~~
