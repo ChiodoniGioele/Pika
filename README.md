@@ -10,6 +10,8 @@
 
 [Link line](https://medium.com/@zxlee618/drawing-on-a-html-canvas-b7566624b17f)
 
+[Link Rectangle](https://jsfiddle.net/richardcwc/ukqhf54k/)
+
 ---
 ##### Eventi 
 

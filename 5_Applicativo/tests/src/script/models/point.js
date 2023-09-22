@@ -64,5 +64,7 @@ class Point{
         // dblclick
         // mousedown
     canvas.addEventListener("dblclick",function(e){
-        points.push(new Point(e, canvas, canvasDrawed, points.length));
+        if(pointMode.checked){
+            points.push(new Point(e, canvas, canvasDrawed, points.length));
+        }
     });

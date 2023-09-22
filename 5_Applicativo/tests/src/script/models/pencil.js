@@ -28,9 +28,9 @@ class Pencil{
         }
     }
 
-    end(event, STATUS_BTN) {
+    end(event, status) {
         // non posso piu disegnare perchè non btn non premuto
-        if (event.button == STATUS_BTN) {
+        if (event.button == status) {
             return false;
         }
         return true;
@@ -47,20 +47,30 @@ class Pencil{
 
 
 
-
-// event 
-    // quando premuto start disegno
+        // event 
+// quando premuto start disegno
     canvas.addEventListener("mousedown",function(e){
-        p.startDrawing(e, canvas, canvasDrawed);
+        // solo se CHECKBOX è selezionato puo iniziare a disegnare
+        if(pencilMode.checked){
+            p.startDrawing(e, canvas, canvasDrawed);
+        }
     });
 
 // quando rilasciato finisci di disegnare
     canvas.addEventListener("mouseup",function(e){
-        canDraw = p.end(e, 0)
+        if(pencilMode.checked){
+            canDraw = p.end(e, 0)
+        }
     });
 
 // se si muove traccia linea
     canvas.addEventListener("mousemove",function(e){
-        p.move(e, color, canDraw, canvasDrawed)
+        if(pencilMode.checked){
+            p.move(e, color, canDraw, canvasDrawed)
+        }
     });
+
+
+
+
 

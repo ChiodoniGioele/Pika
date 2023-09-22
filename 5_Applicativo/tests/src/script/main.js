@@ -1,13 +1,19 @@
 let canvas = document.getElementById("canvas");
 let canvasDrawed = canvas.getContext('2d');
 
+// bottono
+let pointMode = document.getElementById('point');
+let pencilMode = document.getElementById('pencil');
+let rectangleMode = document.getElementById('rectangle');
+
+
+// points
+    var points = new Array() // array con i puntini
+
 
 // pencil
+        
     let canDraw = false;    // solo se posso disegnare
     let color = "black"
-    
-    var p = new Pencil(canvas);
+    let p = new Pencil(canvas);
 
-
-// array con i puntini
-    var points = new Array()

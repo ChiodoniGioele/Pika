@@ -7,9 +7,31 @@
   <title>Canvas-test</title>
 </head>
 <body>
+
   <canvas id="canvas" width="500" height="500" style="position: absolute; left: 0px; right: 0px; z-index: 0;background-color: aqua; "></canvas>
+
+
+  <div style="position: absolute; left: 500px;">
+    <div>
+      <input type="radio" id="point" name="drone" value="puntini" checked />
+      <label for="puntini">puntini</label>
+    </div>
+  
+    <div>
+      <input type="radio" id="pencil" name="drone" value="penna" />
+      <label for="penna">penna</label>
+    </div>
+  
+    <div>
+      <input type="radio" id="rectangle" name="drone" value="rettangolo" />
+      <label for="rettangolo">rettangolo</label>
+    </div>
+  </div>
+
+
   <script src="./script/models/point.js"></script>
   <script src="./script/models/pencil.js"></script>
+  <script src="./script/models/rectangle.js"></script>
 
   // il file main.js va messo sempre in fondo
   <script src="./script/main.js"></script>
