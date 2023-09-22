@@ -1,70 +1,53 @@
 class Point{
 
-    constructor(event, canvas, canvasDrawed, numPoint){
+    constructor(event, canvas, canvasDrawed, numPoint, color){
+
+        this.canvasDrawed = canvasDrawed;
+    // numero del puntino stampato a schermo
+        this.num = numPoint + 1;
+
+        this.color = color;
+
 
     // Coordinate globali click
-        let eventX = event.clientX;
-        let eventY = event.clientY;
-
-    // coordinate canvas 
-        let xCanvasLeft = canvas.getBoundingClientRect().left;
-        let yCanvasTop = canvas.getBoundingClientRect().top;
-
-    // le coordinate del click
-        let x = this.getXClick(eventX, xCanvasLeft);
-        let y = this.getYClick(eventY, yCanvasTop);
+        this.x = event.clientX - canvas.getBoundingClientRect().left;
+        this.y = event.clientY - canvas.getBoundingClientRect().top;
 
     // disegno il puntino
-        this.drawPoint(canvas, canvasDrawed, x, y, numPoint + 1);
+        this.drawPoint();
     }
 
-    // ritorna la posizione del puntino X
-    getXClick(xE, xC){
-        return  xE- xC;
-    }
-    
-    // ritorna la posizione del puntino Y
-    getYClick(yE, yC){
-        return yE - yC;
-    }
-
-    drawPoint(canvas,canvasDrawed ,x, y, num, color, size) {
-
-        // se dati non inseriti
-            if (color == null) {
-                color = '#000';
-            }
-                if (size == null) {
-                size = 5;
-            }
-
-        // disegno il punt
-            canvasDrawed.beginPath();
-            canvasDrawed.fillStyle = color;
-            canvasDrawed.arc(x, y, size, 0 * Math.PI, 2 * Math.PI);
-            canvasDrawed.fill();
+    drawPoint() {
+        // disegno il punto
+            this.canvasDrawed.beginPath();
+            this.canvasDrawed.fillStyle = color;
+            this.canvasDrawed.arc(this.x, this.y, 5, 0 * Math.PI, 2 * Math.PI);
+            this.canvasDrawed.fill();
         
         // se ce il testo
-            if (num) {
+            if (this.num) {
                 // posizione testo
-                    var textX = x + 2;
-                    var textY = Math.round(y - size - 3);
+                    var textX = this.x + 2;
+                    var textY = Math.round(this.y - 5 - 3);
                 // stampo il testo
-                    canvasDrawed.font = 'Italic 14px Arial';
-                    canvasDrawed.fillStyle = color;
-                    canvasDrawed.textAlign = 'center';
-                    canvasDrawed.fillText(num, textX, textY);
+                this.canvasDrawed.font = 'Italic 14px Arial';
+                this.canvasDrawed.fillStyle = this.color;
+                this.canvasDrawed.textAlign = 'center';
+                this.canvasDrawed.fillText(this.num, textX, textY);
             }
     }
+
+    reDraw(){
+        this.drawPoint()
+    }
+
 }
-
-
 
 // on mouse click over canvas
         // dblclick
         // mousedown
-    canvas.addEventListener("dblclick",function(e){
+    canvas.addEventListener("mousedown",function(e){
         if(pointMode.checked){
-            points.push(new Point(e, canvas, canvasDrawed, points.length));
+            points.push(new Point(e, canvas, canvasDrawed, points.length, color));
         }
     });
