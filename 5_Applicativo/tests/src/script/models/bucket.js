@@ -9,33 +9,46 @@ class Bucket{
             this.y = event.clientY - this.canvas.getBoundingClientRect().top;
 
             this.controlColor = this.getColorPX(this.x, this.y);
-            this.fill();
+            console.log(this.controlColor);
+
+            this.statusX = this.x;
+            this.statusY = this.y;
+            this.i = 0;
+            var finish = false;
+            while(!finish){
+                finish = this.fill(this.statusX, this.statusY);
+            }
 
     }
 
-    fill(){
-        var cells = new Array();
-        cells.push(new Cell(this.x, this.y));
-        while(cells.length > 0){
-            for(var y = cells[0].getY() - 1; y < y + 3; y++){
-                for(var x = cells[0].getX() - 1; x < x + 2; x++){
-                    if( x > this.canvas.getBoundingClientRect().left 
-                            && 
-                        y > this.canvas.getBoundingClientRect().top 
-                            && 
-                        x < this.canvas.getBoundingClientRect().left + 500
-                            &&  
-                        y < this.canvas.getBoundingClientRect().top + 500)
-                    {
-                        if(this.getColorPX(x,y) == this.controlColor){
-                            cells.push(new Cell(x, y));
-                        }
+    fill(cX, cY){
+        if(this.i >= 100){
+            this.statusX = cX;
+            this.statusY = cY;
+            return false;
+        }
+        let centerX = cX;
+        let centerY = cY;
+        
+        for(var y = centerY - 1; y <= centerY + 1; y++){
+            for(var x = centerX - 1; x <= centerX + 1; x++){
+                if( x > this.canvas.getBoundingClientRect().left 
+                        && 
+                    y > this.canvas.getBoundingClientRect().top 
+                        && 
+                    x < this.canvas.getBoundingClientRect().left + 500
+                        &&  
+                    y < this.canvas.getBoundingClientRect().top + 500)
+                {
+                    if(this.getColorPX(x,y) == this.controlColor){
+                        this.colorPX(x,y);
+                        this.i++;
+                        this.fill(x,y);
                     }
                 }
             }
-            this.colorPX(cells[0].getX(), cells[0].getY());
-            delete cells[0];
         }
+        return true;
     }
 
     colorPX(x,y){
@@ -46,19 +59,6 @@ class Bucket{
     getColorPX(x,y){
         let data = this.canvasDrawed.getImageData(x, y, 1, 1).data;
         return `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
-    }
-}
-
-class Cell{
-    constructor(x,y){
-        this.x = x;
-        this.y = y;
-    }
-    getX(){
-        return this.x;
-    }
-    getY(){
-        return this.y;
     }
 }
 

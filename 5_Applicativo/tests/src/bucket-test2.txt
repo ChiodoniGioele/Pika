@@ -1,0 +1,75 @@
+class Bucket {
+    constructor(event, canvas, canvasDrawed, color) {
+        this.canvasDrawed = canvasDrawed;
+        this.canvas = canvas;
+        this.color = color;
+
+        // Coordinate globali click
+        this.x = event.clientX - this.canvas.getBoundingClientRect().left;
+        this.y = event.clientY - this.canvas.getBoundingClientRect().top;
+
+        this.controlColor = this.getColorPX(this.x, this.y);
+        this.fill();
+
+    }
+
+    fill() {
+        let pixels = new Array();
+        pixels.push(new Pixel(this.x, this.y));
+        while (pixels.length >= 0) {
+            for (var posY = pixels[0].y - 1; pixels[0].y + 1 >= posY; posY++) {
+                for (var posX = pixels[0].x - 1; pixels[0].x + 1 >= posX; posX++) {
+                    if (posX > this.canvas.getBoundingClientRect().left
+                        &&
+                        posY > this.canvas.getBoundingClientRect().top
+                        &&
+                        posX < this.canvas.getBoundingClientRect().left + this.canvas.offsetWidth
+                        &&
+                        posY < this.canvas.getBoundingClientRect().top + this.canvas.offsetHeight) {
+                        if (this.getColorPX(posX, posY) == this.controlColor && posX != pixels[0].x && posY != pixels[0].y) {
+                            pixels.push(new Pixel(posX, posY));
+                        }
+                    }
+                }
+            }
+          //  if(pixels.length > this.canvas.offsetWidth * this.canvas.offsetHeight){
+            if(pixels.length > 100000){
+                break;
+            }
+            this.colorPX(pixels[0].x, pixels[0].y);
+            pixels.shift();
+            console.log(pixels.length);
+        }
+    }
+
+    colorPX(x, y) {
+        this.canvasDrawed.moveTo(x, y);
+        this.canvasDrawed.beginPath();
+        this.canvasDrawed.fillStyle = "blue";
+        this.canvasDrawed.fillRect(x, y, 10, 10);
+        this.canvasDrawed.stroke();
+    }
+
+    getColorPX(x, y) {
+        let data = this.canvasDrawed.getImageData(x, y, 1, 1).data;
+        return `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+    }
+}
+
+class Pixel {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+
+
+// on mouse click over canvas
+// dblclick
+// mousedown
+canvas.addEventListener("mousedown", function (e) {
+    if (bucketMode.checked) {
+        new Bucket(e, canvas, canvasDrawed, color);
+    }
+});
