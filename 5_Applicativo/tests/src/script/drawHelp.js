@@ -16,6 +16,9 @@ let color = "black"
 // rectangle array manipolato nel file rectangle.js
     var rects = new Array();
 
+// circle array manipolato nel file circle.js
+    var circle = new Array();
+
 // ridisegno i punti, linee, rettangoli
 function reDrawAll(){
     for(var i = 0; i < lines.length; i++){
@@ -26,6 +29,9 @@ function reDrawAll(){
     }
     for(var i = 0; i < rects.length; i++){
         rects[i].reDraw(color);
+    }
+    for(var i = 0; i < circle.length; i++){
+        circle[i].reDraw(color);
     }
 }
 
