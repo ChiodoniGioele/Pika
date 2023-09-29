@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <canvas id="canvas" width="500" height="500" style="position: absolute; left: 0px; right: 0px; z-index: 0;background-color: aqua; "></canvas>
+  <canvas id="canvas" width="500" height="500" style="position: absolute; left: 0px; right: 0px; z-index: 0;background-image : url(./pika.jfif); "></canvas>
 
 
   <div style="position: absolute; left: 500px;">
@@ -33,6 +33,11 @@
       <label for="cerchio">cerchio</label>
     </div>
 
+    <div>
+      <input type="radio" id="bucket" name="drone" value="secchiello" />
+      <label for="secchiello">secchiello</label>
+    </div>
+
   </div>
 
   <!-- Source .js -->
@@ -40,6 +45,8 @@
   <script src="./script/models/pencil.js"></script>
   <script src="./script/models/rectangle.js"></script>
   <script src="./script/models/circle.js"></script>
+  <script src="./script/models/bucket.js"></script>
+  
   <script src="./script/drawHelp.js"></script>
 
   // il file main.js va messo sempre in fondo
