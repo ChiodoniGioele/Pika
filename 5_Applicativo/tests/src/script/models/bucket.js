@@ -67,7 +67,7 @@ class Bucket{
 // on mouse click over canvas
     // dblclick
     // mousedown
-    canvas.addEventListener("mousedown",function(e){
+    canvas.addEventListener("dblclick",function(e){
         if(bucketMode.checked){
             new Bucket(e, canvas, canvasDrawed, color);
         }

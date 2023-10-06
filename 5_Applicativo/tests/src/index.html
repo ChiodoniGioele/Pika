@@ -1,55 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canvas-test</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas-test</title>
+  </head>
+  <body>
 
-  <canvas id="canvas" width="500" height="500" style="position: absolute; left: 0px; right: 0px; z-index: 0;background-image : url(./pika.jfif); "></canvas>
+    <canvas id="canvas" width="500" height="500"
+      style="position: absolute; left: 0px; right: 0px; z-index: 0;background-image : url(./pika.jfif); "></canvas>
 
+    <div style="position: absolute; left: 500px;">
 
-  <div style="position: absolute; left: 500px;">
-    
-    <div>
-      <input type="radio" id="point" name="drone" value="puntini" checked />
-      <label for="puntini">puntini</label>
+      <div>
+        <input type="radio" id="point" name="drone" value="puntini" checked />
+        <label for="puntini">puntini</label>
+      </div>
+
+      <div>
+        <input type="radio" id="pencil" name="drone" value="penna" />
+        <label for="penna">penna</label>
+      </div>
+
+      <div>
+        <input type="radio" id="rectangle" name="drone" value="rettangolo" />
+        <label for="rettangolo">rettangolo</label>
+      </div>
+
+      <div>
+        <input type="radio" id="circle" name="drone" value="cerchio" />
+        <label for="cerchio">cerchio</label>
+      </div>
+
+      <div>
+        <input type="radio" id="mouse" name="drone" value="mouse" />
+        <label for="mouse">mouse</label>
+      </div>
+
+      <button id="delete">Delete</button>
+      <!--
+      <div>
+        <input type="radio" id="bucket" name="drone" value="secchiello" />
+        <label for="secchiello">secchiello</label>
+      </div>
+    -->
+
     </div>
-  
-    <div>
-      <input type="radio" id="pencil" name="drone" value="penna" />
-      <label for="penna">penna</label>
-    </div>
-  
-    <div>
-      <input type="radio" id="rectangle" name="drone" value="rettangolo" />
-      <label for="rettangolo">rettangolo</label>
-    </div>
 
-    <div>
-      <input type="radio" id="circle" name="drone" value="cerchio" />
-      <label for="cerchio">cerchio</label>
-    </div>
+    <!-- Source .js -->
+    <script src="./script/models/point.js"></script>
+    <script src="./script/models/pencil.js"></script>
+    <script src="./script/models/rectangle.js"></script>
+    <script src="./script/models/circle.js"></script>
+    <script src="./script/models/mouse.js"></script>
+    <!-- <script src="./script/models/bucket.js"></script> -->
 
-    <div>
-      <input type="radio" id="bucket" name="drone" value="secchiello" />
-      <label for="secchiello">secchiello</label>
-    </div>
+    <script src="./script/drawHelp.js"></script>
 
-  </div>
-
-  <!-- Source .js -->
-  <script src="./script/models/point.js"></script>
-  <script src="./script/models/pencil.js"></script>
-  <script src="./script/models/rectangle.js"></script>
-  <script src="./script/models/circle.js"></script>
-  <script src="./script/models/bucket.js"></script>
-  
-  <script src="./script/drawHelp.js"></script>
-
-  // il file main.js va messo sempre in fondo
-  <script src="./script/main.js"></script>
-</body>
+    // il file main.js va messo sempre in fondo
+    <script src="./script/main.js"></script>
+  </body>
 </html>
