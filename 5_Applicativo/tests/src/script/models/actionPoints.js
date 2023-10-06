@@ -4,7 +4,7 @@ let pointSelected = - 1;
 let canMove = false;
 
 canvas.addEventListener("dblclick", function (e) {
-    if (mouseMode.checked) {
+    if (mousePointsMode.checked) {
         let pointReturned = getPointClicked(e);
         if (pointReturned != null) {
             if (pointReturned == pointSelected && isAPointSelected) {
@@ -17,7 +17,7 @@ canvas.addEventListener("dblclick", function (e) {
 });
 
 canvas.addEventListener("mousedown", function (e) {
-    if (mouseMode.checked && isAPointSelected) {
+    if (mousePointsMode.checked && isAPointSelected) {
         if (isAPointSelected) {
             canMove = isSamePoint(e, pointSelected);
         }
@@ -26,7 +26,7 @@ canvas.addEventListener("mousedown", function (e) {
 
 // se si muove traccia linea
 canvas.addEventListener("mousemove", function (e) {
-    if (mouseMode.checked && canMove) {
+    if (mousePointsMode.checked && canMove) {
         points[pointSelected].x = e.clientX - canvas.getBoundingClientRect().left;
         points[pointSelected].y = e.clientY - canvas.getBoundingClientRect().top;
         reDrawAll();
@@ -35,7 +35,7 @@ canvas.addEventListener("mousemove", function (e) {
 
 // quando rilasciato finisci di disegnare
 canvas.addEventListener("mouseup", function (e) {
-    if (mouseMode.checked) {
+    if (mousePointsMode.checked) {
         if (isAPointSelected) {
             canMove = false;
         }

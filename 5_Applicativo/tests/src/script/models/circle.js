@@ -17,6 +17,8 @@ class Circle {
         this.canvasDrawed = canvasDrawed;
 
         this.startDrawing(this.canvasDrawed);
+
+        this.isSelect = false;
     }
 
     startDrawing() {
@@ -25,6 +27,16 @@ class Circle {
     }
 
     move(event, canDraw) {
+
+        if(this.isSelect){
+            this.canvasDrawed.shadowBlur = 10;
+            this.canvasDrawed.shadowColor = "red";
+        }else{
+            this.canvasDrawed.shadowBlur = 0;
+            this.canvasDrawed.shadowColor = null;
+        }
+
+
         // coordinate di dove si trova il mouse
         let mouseX = event.clientX - this.elementRect.left;
         let mouseY = event.clientY - this.elementRect.top;
@@ -57,6 +69,15 @@ class Circle {
     }
 
     reDraw(color) {
+
+        if(this.isSelect){
+            this.canvasDrawed.shadowBlur = 10;
+            this.canvasDrawed.shadowColor = "red";
+        }else{
+            this.canvasDrawed.shadowBlur = 0;
+            this.canvasDrawed.shadowColor = null;
+        }
+
         // sposto la penna nel punto di partenza x y
         this.canvasDrawed.moveTo(this.startX, this.startY);
 

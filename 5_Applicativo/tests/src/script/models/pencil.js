@@ -1,6 +1,5 @@
 class Pencil {
 
-
     constructor(canvas, canvasDrawed, event) {
         // salvo le coordinate di dove è passato il mouse 
         this.arrayEventX = new Array();
@@ -11,6 +10,8 @@ class Pencil {
         this.elementRect = canvas.getBoundingClientRect();
 
         this.startDrawing(event);
+
+        this.isSelect = false;
     }
 
     startDrawing(event) {
@@ -28,6 +29,14 @@ class Pencil {
     move(event, color, canDraw) {
         // se posso disegnare
         if (canDraw) {
+
+            if(this.isSelect){
+                this.canvasDrawed.shadowBlur = 10;
+                this.canvasDrawed.shadowColor = "red";
+            }else{
+                this.canvasDrawed.shadowBlur = 0;
+                this.canvasDrawed.shadowColor = null;
+            }
 
             // salvo i valori di dove il mouse
             this.arrayEventX.push(event.clientX);
@@ -60,6 +69,15 @@ class Pencil {
 
 
     reDraw(color) {
+
+        if(this.isSelect){
+            this.canvasDrawed.shadowBlur = 10;
+            this.canvasDrawed.shadowColor = "red";
+        }else{
+            this.canvasDrawed.shadowBlur = 0;
+            this.canvasDrawed.shadowColor = null;
+        }
+
         this.setLineProperties(this.canvasDrawed);
         this.canvasDrawed.beginPath();
         // sposto la penna su dove inizia la linea

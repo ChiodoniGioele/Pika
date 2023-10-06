@@ -22,8 +22,13 @@ class Point {
         // disegno il punto
         this.canvasDrawed.beginPath();
         this.canvasDrawed.fillStyle = this.color;
-        this.canvasDrawed.shadowBlur = 0;
-        this.canvasDrawed.shadowColor = null;
+        if (this.isSelect) {
+            this.canvasDrawed.shadowBlur = 10;
+            this.canvasDrawed.shadowColor = "red";
+        } else {
+            this.canvasDrawed.shadowBlur = 0;
+            this.canvasDrawed.shadowColor = null;
+        }
         this.canvasDrawed.arc(this.x, this.y, 5, 0 * Math.PI, 2 * Math.PI);
         this.canvasDrawed.fill();
 
@@ -41,34 +46,7 @@ class Point {
     }
 
     reDraw() {
-        if(this.isSelect){
-            this.drawPointShadow();
-        }else{
-            this.drawPoint()
-        }
-        
-    }
-
-    drawPointShadow(){
-                // disegno il punto
-                this.canvasDrawed.beginPath();
-                this.canvasDrawed.fillStyle = this.color;
-                this.canvasDrawed.shadowBlur = 10;
-                this.canvasDrawed.shadowColor = "red";
-                this.canvasDrawed.arc(this.x, this.y, 5, 0 * Math.PI, 2 * Math.PI);
-                this.canvasDrawed.fill();
-        
-                // se ce il testo
-                if (this.num) {
-                    // posizione testo
-                    var textX = this.x + 2;
-                    var textY = Math.round(this.y - 5 - 3);
-                    // stampo il testo
-                    this.canvasDrawed.font = 'Italic 14px Arial';
-                    this.canvasDrawed.fillStyle = this.color;
-                    this.canvasDrawed.textAlign = 'center';
-                    this.canvasDrawed.fillText(this.num, textX, textY);
-                }
+        this.drawPoint()
     }
 
 }
