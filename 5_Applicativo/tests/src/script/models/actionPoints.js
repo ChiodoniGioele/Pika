@@ -6,22 +6,19 @@ let pointSelected = null;
 
 canvas.addEventListener("dblclick", function (e) {
     if (mouseMode.checked) {
-        let pointReturned = getObjClick(e);
+        let pointReturned = getPointClicked(e);
+
         if (pointReturned != null) {
-            if(isSamePoint(e,pointReturned) && pointSelected != null){
-                pointSelected.color = oldColorPoint;
-                pointSelected = null;
-                isPointSelect = false;
-                reDrawAll();
-            }else{
-                selectThisPoint(pointReturned);
+            if (isPointSelect) {
+                if (pointReturned.num == pointSelected.num) {
+                    deselectPoint();
+                    return;
+                }
             }
-            
+            selectThisPoint(pointReturned);
         }
     }
 });
-
-
 
 canvas.addEventListener("mousedown", function (e) {
     if (mouseMode.checked && isPointSelect) {
@@ -49,6 +46,12 @@ canvas.addEventListener("mouseup", function (e) {
     }
 });
 
+function deselectPoint() {
+    pointSelected.color = oldColorPoint;
+    pointSelected = null;
+    isPointSelect = false;
+    reDrawAll();
+}
 
 function selectThisPoint(pointReturned) {
     if (isPointSelect) {
@@ -67,11 +70,12 @@ function selectThisPoint(pointReturned) {
     }
 }
 
-function getObjClick(event) {
+function getPointClicked(event) {
     let x = event.clientX - canvas.getBoundingClientRect().left;
     let y = event.clientY - canvas.getBoundingClientRect().top;
     for (var i = 0; i < points.length; i++) {
         if (getDistancePointClick(points[i], x, y) < 20) {
+            posPointClick = i;
             return points[i];
         }
     }
@@ -92,4 +96,26 @@ function isSamePoint(event, point) {
     } else {
         return false;
     }
+}
+
+function deletePoint() {
+    if (isPointSelect) {
+        points.splice(pointSelected.num - 1, 1);
+        for (let i = 0; i < points.length; i++) {
+            points[i].num = i + 1;
+        }
+        document.getElementById("newNumPoint").setAttribute("max", points.length);
+        reDrawAll();
+    }
+}
+
+function renamePoint() {
+    let newNum = document.getElementById("newNumPoint").value;
+    deletePoint();
+    points.splice(newNum - 1, 0, pointSelected);
+    for (let i = 0; i < points.length; i++) {
+        points[i].num = i + 1;
+    }
+    document.getElementById("newNumPoint").setAttribute("max", points.length);
+    reDrawAll();
 }

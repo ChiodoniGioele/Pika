@@ -49,5 +49,6 @@ class Point {
 canvas.addEventListener("mousedown", function (e) {
     if (pointMode.checked) {
         points.push(new Point(e, canvas, canvasDrawed, points.length, color));
+        document.getElementById("newNumPoint").setAttribute("max", points.length);
     }
 });
