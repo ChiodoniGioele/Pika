@@ -51,11 +51,7 @@ class Rectangle {
             this.canvasDrawed.rect(this.startX, this.startY, width, height);
 
             // imposto il colore
-            if (this.color) {
-                this.canvasDrawed.strokeStyle = color;
-            } else {
-                this.canvasDrawed.strokeStyle = "Black";
-            }
+            this.canvasDrawed.strokeStyle = this.color;
 
             this.canvasDrawed.lineWidth = 10;
             this.canvasDrawed.stroke();
@@ -88,11 +84,7 @@ class Rectangle {
         this.canvasDrawed.rect(this.startX, this.startY, this.endX, this.endY);
 
         // imposto il colore
-        if (color) {
-            this.canvasDrawed.strokeStyle = color;
-        } else {
-            this.canvasDrawed.strokeStyle = this.color;
-        }
+        this.canvasDrawed.strokeStyle = this.color;
         this.canvasDrawed.lineWidth = 10;
         // disegno
         this.canvasDrawed.stroke();
@@ -107,7 +99,7 @@ class Rectangle {
 canvas.addEventListener("mousedown", function (e) {
     // solo se CHECKBOX è selezionato puo iniziare a disegnare
     if (rectangleMode.checked) {
-        rects.push(new Rectangle(e, canvas, canvasDrawed));
+        rects.push(new Rectangle(e, canvas, canvasDrawed, color));
     }
 });
 
