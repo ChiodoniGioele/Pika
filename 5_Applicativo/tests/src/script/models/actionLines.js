@@ -48,3 +48,18 @@ function getDistancePointLine(cX, cY, x, y) {
     return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
 }
 
+function changeColorLine(){
+    if (lineSelected >= 0 && mouseLinesMode.checked) {
+        let color = document.getElementById("color").value;
+        lines[lineSelected].color = color;
+        reDrawAll();
+    }
+}
+
+function deleteLine(){
+    if (lineSelected >= 0 && mouseLinesMode.checked) {
+        lines.splice(lineSelected, 1);
+        lineSelected = -1;
+        reDrawAll();
+    }
+}

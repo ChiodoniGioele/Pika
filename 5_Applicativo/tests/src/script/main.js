@@ -16,7 +16,7 @@ function deleteElement(){
     }else if(mouseCirclesMode.checked){
         deleteCircle();
     }else if(mouseLinesMode.checked){
-      //  deleteLine();
+        deleteLine();
     }
 }
 
@@ -28,5 +28,7 @@ function colorElement(){
         changeColorPoint();
     }else if(mouseCirclesMode.checked){
         changeColorCircle();
+    }else if(mouseLinesMode.checked){
+        changeColorLine();
     }
 }
