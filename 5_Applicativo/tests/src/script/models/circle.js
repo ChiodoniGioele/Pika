@@ -51,11 +51,7 @@ class Circle {
             this.canvasDrawed.arc(this.startX, this.startY, this.raggio, 0, 2 * Math.PI, false);
 
             // imposto il colore
-            if (this.color) {
-                this.canvasDrawed.strokeStyle = color;
-            } else {
-                this.canvasDrawed.strokeStyle = "Black";
-            }
+            this.canvasDrawed.strokeStyle = this.color;
 
             this.canvasDrawed.lineWidth = 10;
             this.canvasDrawed.stroke();
@@ -86,11 +82,7 @@ class Circle {
         this.canvasDrawed.arc(this.startX, this.startY, this.raggio, 0, 2 * Math.PI, false);
 
         // imposto il colore
-        if (color) {
-            this.canvasDrawed.strokeStyle = color;
-        } else {
-            this.canvasDrawed.strokeStyle = this.color;
-        }
+        this.canvasDrawed.strokeStyle = this.color;
         this.canvasDrawed.lineWidth = 10;
         // disegno
         this.canvasDrawed.stroke();
@@ -105,7 +97,7 @@ class Circle {
 canvas.addEventListener("mousedown", function (e) {
     // solo se CHECKBOX è selezionato puo iniziare a disegnare
     if (circleMode.checked) {
-        circle.push(new Circle(e, canvas, canvasDrawed));
+        circle.push(new Circle(e, canvas, canvasDrawed, color));
     }
 });
 

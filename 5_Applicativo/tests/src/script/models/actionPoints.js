@@ -68,7 +68,7 @@ function getPointClicked(event) {
 function getDistancePointClick(point, x, y) {
     let distanceX = Math.abs(point.x - x);
     let distanceY = Math.abs(point.y - y);
-    return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2))
+    return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
 }
 
 function isSamePoint(event, point) {

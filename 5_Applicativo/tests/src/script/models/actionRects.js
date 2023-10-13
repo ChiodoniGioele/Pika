@@ -1,13 +1,14 @@
 let rectSelected = -1;
-let oldXMouse = 0;
-let oldYMouse = 0;
+let oldXMouseRect = 0;
+let oldYMouseRect = 0;
+
 canvas.addEventListener("dblclick", function (e) {
     if (mouseRectsMode.checked) {
         let x = e.clientX - canvas.getBoundingClientRect().left;
         let y = e.clientY - canvas.getBoundingClientRect().top;
         let rectReturned = isInARect(x, y);
         if (rectReturned >= 0) {
-            if(rectReturned == rectSelected && isARectSelect()){
+            if (rectReturned == rectSelected && isARectSelect()) {
                 deselectRect();
                 return;
             }
@@ -16,13 +17,13 @@ canvas.addEventListener("dblclick", function (e) {
     }
 });
 
-function deselectRect(){
+function deselectRect() {
     rects[rectSelected].isSelect = false;
     rectSelected = -1;
     reDrawAll();
 }
 
-function selectRect(rectReturned){
+function selectRect(rectReturned) {
     if (rectSelected >= 0 && rectSelected < rects.length) {
         rects[rectSelected].isSelect = false;
     }
@@ -37,57 +38,57 @@ canvas.addEventListener("mousedown", function (e) {
     }
 });
 
-// se si muove traccia linea
+
 canvas.addEventListener("mousemove", function (e) {
     if (mouseRectsMode.checked && canMove && isARectSelect()) {
-        let difX = (e.clientX - canvas.getBoundingClientRect().left) - oldXMouse;
-        let difY = (e.clientY - canvas.getBoundingClientRect().top) - oldYMouse;
-        rects[rectSelected].startX +=  difX;
-        rects[rectSelected].startY +=  difY;
+        let difX = (e.clientX - canvas.getBoundingClientRect().left) - oldXMouseRect;
+        let difY = (e.clientY - canvas.getBoundingClientRect().top) - oldYMouseRect;
+        rects[rectSelected].startX += difX;
+        rects[rectSelected].startY += difY;
         reDrawAll();
     }
-    oldXMouse = e.clientX - canvas.getBoundingClientRect().left;
-    oldYMouse = e.clientY - canvas.getBoundingClientRect().top;
+    oldXMouseRect = e.clientX - canvas.getBoundingClientRect().left;
+    oldYMouseRect = e.clientY - canvas.getBoundingClientRect().top;
 });
 
 // quando rilasciato finisci di disegnare
 canvas.addEventListener("mouseup", function (e) {
-    if (mouseRectsMode.checked && isARectSelect) {
+    if (mouseRectsMode.checked && isARectSelect()) {
         canMove = false;
-        oldXMouse = 0;
-        oldYMouse = 0;
+        oldXMouseRect = 0;
+        oldYMouseRect = 0;
     }
 });
 
 
 function isInARect(x, y) {
     for (var i = 0; i < rects.length; i++) {
-        if (isInX(rects[i], x) && isInY(rects[i], y)) {
+        if (isInXRect(rects[i], x) && isInYRect(rects[i], y)) {
             return i;
         }
     }
     return -1;
 }
 
-function isInX(r, x) {
+function isInXRect(r, x) {
     let c1 = r.startX;
     let c2 = r.startX + r.endX;
-    if (isBetween(c1, c2, x)) {
+    if (isBetweenRect(c1, c2, x)) {
         return true;
     }
     return false;
 }
 
-function isInY(r, y) {
+function isInYRect(r, y) {
     let c1 = r.startY;
     let c2 = r.startY + r.endY;
-    if (isBetween(c1, c2, y)) {
+    if (isBetweenRect(c1, c2, y)) {
         return true;
     }
     return false;
 }
 
-function isBetween(c1, c2, p) {
+function isBetweenRect(c1, c2, p) {
     if (c1 > c2) {
         if (p > c2 && p < c1) {
             return true;
@@ -101,29 +102,30 @@ function isBetween(c1, c2, p) {
 }
 
 function isARectSelect() {
-    if(rectSelected >= 0){
+    if (rectSelected >= 0) {
         return true;
     }
     return false;
 }
 
-function isSameRects(event){
+function isSameRects(event) {
     let x = event.clientX - canvas.getBoundingClientRect().left;
     let y = event.clientY - canvas.getBoundingClientRect().top;
-    if(isInARect(x,y) == rectSelected){
+    if (isInARect(x, y) == rectSelected) {
         return true;
     }
     return false;
 }
 
-function deleteRetc(){
-    if(isARectSelect() && mouseRectsMode.checked){
+function deleteRetc() {
+    if (isARectSelect() && mouseRectsMode.checked) {
         rects.splice(rectSelected, 1);
+        rectSelected = -1;
         reDrawAll();
     }
 }
 
-function changeColorRect(){
+function changeColorRect() {
     if (isARectSelect() && mouseRectsMode.checked) {
         let color = document.getElementById("color").value;
         rects[rectSelected].color = color;

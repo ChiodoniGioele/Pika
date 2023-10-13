@@ -4,6 +4,7 @@ let rectangleMode = document.getElementById('rectangle');
 let circleMode = document.getElementById('circle');
 let mousePointsMode = document.getElementById('mousePoints');
 let mouseRectsMode = document.getElementById('mouseRects');
+let mouseCirclesMode = document.getElementById('mouseCircles');
 // let bucketMode = document.getElementById('bucket');
 
 function deleteElement(){
@@ -11,6 +12,8 @@ function deleteElement(){
         deleteRetc();
     }else if(mousePointsMode.checked){
         deletePoint();
+    }else if(mouseCirclesMode.checked){
+        deleteCircle();
     }
 }
 
@@ -20,5 +23,7 @@ function colorElement(){
         changeColorRect();
     }else if(mousePointsMode.checked){
         changeColorPoint();
+    }else if(mouseCirclesMode.checked){
+        changeColorCircle();
     }
 }
