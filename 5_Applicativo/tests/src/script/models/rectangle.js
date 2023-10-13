@@ -66,7 +66,7 @@ class Rectangle {
         return false;
     }
 
-    reDraw(color) {
+    reDraw() {
 
         if(this.isSelect){
             this.canvasDrawed.shadowBlur = 10;

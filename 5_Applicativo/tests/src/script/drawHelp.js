@@ -23,16 +23,16 @@ var circle = new Array();
 function reDrawAll() {
     canvasDrawed.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
     for (var i = 0; i < lines.length; i++) {
-        lines[i].reDraw(color);
+        lines[i].reDraw();
     }
     for (var i = 0; i < points.length; i++) {
         points[i].reDraw();
     }
     for (var i = 0; i < rects.length; i++) {
-        rects[i].reDraw(color);
+        rects[i].reDraw();
     }
     for (var i = 0; i < circle.length; i++) {
-        circle[i].reDraw(color);
+        circle[i].reDraw();
     }
 }
 

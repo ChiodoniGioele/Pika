@@ -5,6 +5,7 @@ let circleMode = document.getElementById('circle');
 let mousePointsMode = document.getElementById('mousePoints');
 let mouseRectsMode = document.getElementById('mouseRects');
 let mouseCirclesMode = document.getElementById('mouseCircles');
+let mouseLinesMode = document.getElementById('mouseLines');
 // let bucketMode = document.getElementById('bucket');
 
 function deleteElement(){
@@ -14,6 +15,8 @@ function deleteElement(){
         deletePoint();
     }else if(mouseCirclesMode.checked){
         deleteCircle();
+    }else if(mouseLinesMode.checked){
+      //  deleteLine();
     }
 }
 
