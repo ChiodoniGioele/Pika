@@ -13,6 +13,3 @@ Il progetto consiste in un applicativo web per creare le immagini con i puntini 
 [Link line](https://medium.com/@zxlee618/drawing-on-a-html-canvas-b7566624b17f)
 
 [Link Rectangle](https://jsfiddle.net/richardcwc/ukqhf54k/)
-
-test
-

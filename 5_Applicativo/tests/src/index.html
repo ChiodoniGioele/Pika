@@ -9,6 +9,8 @@
   <body>
     <canvas id="canvas" width="500" height="500"
       style="position: absolute; left: 0px; right: 0px; z-index: 0;background-image : url(./pika.jfif); "></canvas>
+
+      
     <div style="position: absolute; left: 500px;">
       <div>
         <input type="radio" id="point" name="drone" value="puntini" checked />
@@ -42,12 +44,51 @@
         <input type="radio" id="mouseLines" name="drone" value="mouseLines" />
         <label for="mouseLines">Mouse Lines</label>
       </div>
+
+      <br>
+
       <button id="delete" onclick="deleteElement()">Delete</button>
-      <input type="number" id="newNumPoint" min="1" max="1">
+
+      <br>
+      <br>
+
+      <input type="number" id="newNumPoint" min="1" max="1">      
       <button id="submitNewNumPoint" onclick="renamePoint()">Submit New Num</button>
+
+      <br>
+      <br>
+
       <input type="color" id="color">
       <button id="submitColor" onclick="colorElement()">Submit Color</button>
+
+      <br>
+      <br>
+
       <button id="connectDots" onclick="connectDots()">Connect Dots</button>
+
+      <br>
+      <br>
+
+
+      <div>
+
+        <input type="checkbox" checked="true" id="pointLayer" onclick="reDrawAll()">
+        <label for="pointLayer">Point Layer</label>
+        <br>
+        <input type="checkbox" checked="true" id="linesLayer" onclick="reDrawAll()">
+        <label for="linesLayer">Lines Layer</label>
+        <br>
+        <input type="checkbox" checked="true" id="rectLayer" onclick="reDrawAll()">
+        <label for="rectLayer">Rects Layer</label>
+        <br>
+        <input type="checkbox" checked="true" id="circleLayer" onclick="reDrawAll()">
+        <label for="circleLayer">Circles Layer</label>
+
+      </div>
+
+
+
+
       <!--
       <div>
         <input type="radio" id="bucket" name="drone" value="secchiello" />

@@ -24,23 +24,34 @@ var circle = new Array();
 // ridisegno i punti, linee, rettangoli
 function reDrawAll() {
     canvasDrawed.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
-    for (var i = 0; i < lines.length; i++) {
-        lines[i].reDraw();
-    }
-    for (var i = 0; i < points.length; i++) {
-        points[i].reDraw();
-    }
-    for (var i = 0; i < rects.length; i++) {
-        rects[i].reDraw();
-    }
-    for (var i = 0; i < circle.length; i++) {
-        circle[i].reDraw();
+    if(pencilLayer.checked){
+        for (var i = 0; i < lines.length; i++) {
+            lines[i].reDraw();
+        }
     }
 
-    if(isPointConnect){
-        reConnectDots();
+    if(pointLayer.checked){
+        for (var i = 0; i < points.length; i++) {
+            points[i].reDraw();
+        }
+
+        if(isPointConnect){
+            reConnectDots();
+        }
+
     }
 
+    if(rectLayer.checked){
+        for (var i = 0; i < rects.length; i++) {
+            rects[i].reDraw();
+        }
+    }
+
+    if(circleLayer.checked){
+        for (var i = 0; i < circle.length; i++) {
+            circle[i].reDraw();
+        }
+    }
 }
 
 

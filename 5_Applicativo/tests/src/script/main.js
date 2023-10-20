@@ -8,6 +8,12 @@ let mouseCirclesMode = document.getElementById('mouseCircles');
 let mouseLinesMode = document.getElementById('mouseLines');
 // let bucketMode = document.getElementById('bucket');
 
+
+let pointLayer = document.getElementById('pointLayer');
+let pencilLayer = document.getElementById('linesLayer');
+let rectLayer = document.getElementById('rectLayer');
+let circleLayer = document.getElementById('circleLayer');
+
 function deleteElement(){
     if(mouseRectsMode.checked){
         deleteRetc();
@@ -46,6 +52,8 @@ function connectDots(){
         for(var point = 1; point < points.length; point++){
             canvasDrawed.beginPath();
             canvasDrawed.lineWidth = 3;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
             canvasDrawed.moveTo(oldPoint.x , oldPoint.y);
             canvasDrawed.lineTo(points[point].x, points[point].y);
             canvasDrawed.stroke();
@@ -60,6 +68,8 @@ function reConnectDots(){
     for(var point = 1; point < points.length; point++){
         canvasDrawed.beginPath();
         canvasDrawed.lineWidth = 3;
+        canvasDrawed.shadowBlur = 0;
+        canvasDrawed.shadowColor = null;
         canvasDrawed.moveTo(oldPoint.x , oldPoint.y);
         canvasDrawed.lineTo(points[point].x, points[point].y);
         canvasDrawed.stroke();
