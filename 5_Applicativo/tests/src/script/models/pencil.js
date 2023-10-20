@@ -65,10 +65,10 @@ class Pencil {
 
     reDraw() {
 
-        if(this.isSelect){
+        if (this.isSelect) {
             this.canvasDrawed.shadowBlur = 3;
             this.canvasDrawed.shadowColor = "red";
-        }else{
+        } else {
             this.canvasDrawed.shadowBlur = 0;
             this.canvasDrawed.shadowColor = null;
         }

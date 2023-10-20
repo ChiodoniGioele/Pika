@@ -14,63 +14,65 @@ let pencilLayer = document.getElementById('linesLayer');
 let rectLayer = document.getElementById('rectLayer');
 let circleLayer = document.getElementById('circleLayer');
 
-function deleteElement(){
-    if(mouseRectsMode.checked){
+function deleteElement() {
+    if (mouseRectsMode.checked) {
         deleteRetc();
-    }else if(mousePointsMode.checked){
+    } else if (mousePointsMode.checked) {
         deletePoint();
-    }else if(mouseCirclesMode.checked){
+    } else if (mouseCirclesMode.checked) {
         deleteCircle();
-    }else if(mouseLinesMode.checked){
+    } else if (mouseLinesMode.checked) {
         deleteLine();
     }
-    if(isPointConnect){
+    if (isPointConnect) {
 
     }
-    
+
 }
 
-function colorElement(){
+function colorElement() {
     changeColorPoint()
-    if(mouseRectsMode.checked){
+    if (mouseRectsMode.checked) {
         changeColorRect();
-    }else if(mousePointsMode.checked){
+    } else if (mousePointsMode.checked) {
         changeColorPoint();
-    }else if(mouseCirclesMode.checked){
+    } else if (mouseCirclesMode.checked) {
         changeColorCircle();
-    }else if(mouseLinesMode.checked){
+    } else if (mouseLinesMode.checked) {
         changeColorLine();
     }
 }
 
-function connectDots(){
-    if(isPointConnect){
-        isPointConnect = false;
-        reDrawAll();
-    }else{
-        let oldPoint = points[0];
-        for(var point = 1; point < points.length; point++){
-            canvasDrawed.beginPath();
-            canvasDrawed.lineWidth = 3;
-            canvasDrawed.shadowBlur = 0;
-            canvasDrawed.shadowColor = null;
-            canvasDrawed.moveTo(oldPoint.x , oldPoint.y);
-            canvasDrawed.lineTo(points[point].x, points[point].y);
-            canvasDrawed.stroke();
-            oldPoint = points[point];
+function connectDots() {
+    if (pointLayer.checked) {
+        if (isPointConnect) {
+            isPointConnect = false;
+            reDrawAll();
+        } else {
+            let oldPoint = points[0];
+            for (var point = 1; point < points.length; point++) {
+                canvasDrawed.beginPath();
+                canvasDrawed.lineWidth = 3;
+                canvasDrawed.shadowBlur = 0;
+                canvasDrawed.shadowColor = null;
+                canvasDrawed.moveTo(oldPoint.x, oldPoint.y);
+                canvasDrawed.lineTo(points[point].x, points[point].y);
+                canvasDrawed.stroke();
+                oldPoint = points[point];
+            }
+            isPointConnect = true;
         }
-        isPointConnect = true;
     }
 }
 
-function reConnectDots(){
+function reConnectDots() {
     let oldPoint = points[0];
-    for(var point = 1; point < points.length; point++){
+    for (var point = 1; point < points.length; point++) {
         canvasDrawed.beginPath();
         canvasDrawed.lineWidth = 3;
         canvasDrawed.shadowBlur = 0;
         canvasDrawed.shadowColor = null;
-        canvasDrawed.moveTo(oldPoint.x , oldPoint.y);
+        canvasDrawed.moveTo(oldPoint.x, oldPoint.y);
         canvasDrawed.lineTo(points[point].x, points[point].y);
         canvasDrawed.stroke();
         oldPoint = points[point];
@@ -78,47 +80,83 @@ function reConnectDots(){
 }
 
 
-function pointLayerCheck(){
-    if(!pointLayer.checked){
+function pointLayerCheck() {
+    if (!pointLayer.checked) {
         pointMode.disabled = true;
         mousePointsMode.disabled = true;
-    }else{
+    } else {
         pointMode.disabled = false;
         mousePointsMode.disabled = false;
     }
+
+    if (pointMode.checked) {
+        pencilMode.checked = true;
+    }
+
+    if (mousePointsMode.checked) {
+        mouseCirclesMode.checked = true;
+    }
+
     reDrawAll();
 }
 
-function linesLayerCheck(){
-    if(!pencilLayer.checked){
+function linesLayerCheck() {
+    if (!pencilLayer.checked) {
         pencilMode.disabled = true;
         mouseLinesMode.disabled = true;
-    }else{
+    } else {
         pencilMode.disabled = false;
         mouseLinesMode.disabled = false;
     }
+
+    if (pencilMode.checked) {
+        pointMode.checked = true;
+    }
+
+    if (mousePointsMode.checked) {
+        mousePointsMode.checked = true;
+    }
+
     reDrawAll();
 }
 
 
-function rectLayerCheck(){
-    if(!rectLayer.checked){
+function rectLayerCheck() {
+    if (!rectLayer.checked) {
         rectangleMode.disabled = true;
         mouseRectsMode.disabled = true;
-    }else{
+    } else {
         rectangleMode.disabled = false;
         mouseRectsMode.disabled = false;
     }
+
+    if (rectangleMode.checked) {
+        pointMode.checked = true;
+    }
+
+    if (mouseRectsMode.checked) {
+        mousePointsMode.checked = true;
+    }
+
     reDrawAll();
 }
 
-function circleLayerCheck(){
-    if(!circleLayer.checked){
+function circleLayerCheck() {
+    if (!circleLayer.checked) {
         circleMode.disabled = true;
         mouseCirclesMode.disabled = true;
-    }else{
+    } else {
         circleMode.disabled = false;
         mouseCirclesMode.disabled = false;
     }
+
+    if (circleMode.checked) {
+        pointMode.checked = true;
+    }
+
+    if (mouseCirclesMode.checked) {
+        mousePointsMode.checked = true;
+    }
+
     reDrawAll();
 }
