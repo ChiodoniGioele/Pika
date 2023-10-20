@@ -76,3 +76,49 @@ function reConnectDots(){
         oldPoint = points[point];
     }
 }
+
+
+function pointLayerCheck(){
+    if(!pointLayer.checked){
+        pointMode.disabled = true;
+        mousePointsMode.disabled = true;
+    }else{
+        pointMode.disabled = false;
+        mousePointsMode.disabled = false;
+    }
+    reDrawAll();
+}
+
+function linesLayerCheck(){
+    if(!pencilLayer.checked){
+        pencilMode.disabled = true;
+        mouseLinesMode.disabled = true;
+    }else{
+        pencilMode.disabled = false;
+        mouseLinesMode.disabled = false;
+    }
+    reDrawAll();
+}
+
+
+function rectLayerCheck(){
+    if(!rectLayer.checked){
+        rectangleMode.disabled = true;
+        mouseRectsMode.disabled = true;
+    }else{
+        rectangleMode.disabled = false;
+        mouseRectsMode.disabled = false;
+    }
+    reDrawAll();
+}
+
+function circleLayerCheck(){
+    if(!circleLayer.checked){
+        circleMode.disabled = true;
+        mouseCirclesMode.disabled = true;
+    }else{
+        circleMode.disabled = false;
+        mouseCirclesMode.disabled = false;
+    }
+    reDrawAll();
+}
