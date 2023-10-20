@@ -1,10 +1,12 @@
 let canvas = document.getElementById("canvas");
 let canvasDrawed = canvas.getContext('2d');
 
+
 let isPointConnect = false;
 
 
 let canDraw = false;    // solo se posso disegnare
+
 let color = "black"
 
 // points array manipolato nel file point.js
@@ -53,6 +55,9 @@ function reDrawAll() {
         }
     }
 }
+
+
+
 
 
 

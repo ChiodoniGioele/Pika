@@ -2,7 +2,6 @@ class Point {
 
     constructor(event, canvas, canvasDrawed, numPoint, color) {
 
-        this.canvasDrawed = canvasDrawed;
         // numero del puntino stampato a schermo
         this.num = numPoint + 1;
 
@@ -10,9 +9,13 @@ class Point {
 
         this.isSelect = false;
 
-        // Coordinate globali click
-        this.x = event.clientX - canvas.getBoundingClientRect().left;
-        this.y = event.clientY - canvas.getBoundingClientRect().top;
+        this.rect = canvas.getBoundingClientRect();
+        let scaleX = canvas.width / this.rect.width;
+        let scaleY = canvas.height / this.rect.height;
+        this.x = Math.round((event.x - this.rect.left) * scaleX);
+        this.y = Math.round((event.y - this.rect.top) * scaleY);
+       // this.x = window.innerWidth / event.clientX * canvas.width; // * canvas.getBoundingClientRect().left;
+       // this.y = event.clientY; //- canvas.getBoundingClientRect().top;
 
         // disegno il puntino
         this.drawPoint();
@@ -20,17 +23,17 @@ class Point {
 
     drawPoint() {
         // disegno il punto
-        this.canvasDrawed.beginPath();
-        this.canvasDrawed.fillStyle = this.color;
+        canvasDrawed.beginPath();
+        canvasDrawed.fillStyle = this.color;
         if (this.isSelect) {
-            this.canvasDrawed.shadowBlur = 10;
-            this.canvasDrawed.shadowColor = "red";
+            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowColor = "red";
         } else {
-            this.canvasDrawed.shadowBlur = 0;
-            this.canvasDrawed.shadowColor = null;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
         }
-        this.canvasDrawed.arc(this.x, this.y, 5, 0 * Math.PI, 2 * Math.PI);
-        this.canvasDrawed.fill();
+        canvasDrawed.arc(this.x, this.y, 5, 0 * Math.PI, 2 * Math.PI);
+        canvasDrawed.fill();
 
         // se ce il testo
         if (this.num) {
@@ -38,10 +41,10 @@ class Point {
             var textX = this.x + 2;
             var textY = Math.round(this.y - 5 - 3);
             // stampo il testo
-            this.canvasDrawed.font = 'Italic 14px Arial';
-            this.canvasDrawed.fillStyle = this.color;
-            this.canvasDrawed.textAlign = 'center';
-            this.canvasDrawed.fillText(this.num, textX, textY);
+            canvasDrawed.font = 'Italic 14px Arial';
+            canvasDrawed.fillStyle = this.color;
+            canvasDrawed.textAlign = 'center';
+            canvasDrawed.fillText(this.num, textX, textY);
         }
     }
 

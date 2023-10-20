@@ -1,0 +1,30 @@
+modalita classe
+
+        this.rect = canvas.getBoundingClientRect();
+
+        this.scaleX = canvas.width / this.rect.width;
+        this.scaleY = canvas.height / this.rect.height;
+
+
+    getX(event){
+        return Math.round((event.x - this.rect.left) * this.scaleX)
+    }
+
+    getY(event){
+        return Math.round((event.y - this.rect.top) * this.scaleY);
+    }
+
+
+______________________________________________________________________
+
+metodi
+
+    let rect = canvas.getBoundingClientRect();
+
+    let scaleX = canvas.width / rect.width;
+    let scaleY = canvas.height / rect.height;
+
+    let x =  Math.round((event.x - rect.left) * scaleX);
+    let y =  Math.round((event.y - rect.top) * scaleY);
+
+

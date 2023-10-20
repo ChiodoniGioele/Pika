@@ -1,19 +1,22 @@
 class Pencil {
 
-    constructor(canvas, canvasDrawed, event, color) {
+    constructor(canvas, event, color) {
+
+
+        this.rect = canvas.getBoundingClientRect();
+
+        this.scaleX = canvas.width / this.rect.width;
+        this.scaleY = canvas.height / this.rect.height;
+
         // salvo le coordinate di dove è passato il mouse 
         this.arrayX = new Array();
         this.arrayY = new Array();
 
-        this.canvas = canvas;
-        this.canvasDrawed = canvasDrawed;
-        this.elementRect = canvas.getBoundingClientRect();
-
-        this.startDrawing(event);
-
         this.isSelect = false;
 
         this.color = color;
+
+        this.startDrawing(event);
     }
 
     startDrawing(event) {
@@ -24,27 +27,28 @@ class Pencil {
         this.setLineProperties();
 
         // sposta la penna in x e y senza disegnare
-        this.canvasDrawed.beginPath();
-        this.canvasDrawed.moveTo(event.clientX - this.elementRect.left, event.clientY - this.elementRect.top);
+        canvasDrawed.beginPath();
+        canvasDrawed.moveTo(this.getX(event), this.getY(event));
     }
 
     move(event, canDraw) {
         // se posso disegnare
         if (canDraw) {
 
-            this.canvasDrawed.shadowBlur = 0;
-            this.canvasDrawed.shadowColor = null;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
 
             // salvo i valori di dove il mouse
-            this.arrayX.push(event.clientX);
-            this.arrayY.push(event.clientY);
+            this.arrayX.push(this.getX(event));
+            this.arrayY.push(this.getY(event));
+
             // traccia la riga in x y
-            this.canvasDrawed.lineTo(event.clientX - this.elementRect.left, event.clientY - this.elementRect.top);
+            canvasDrawed.lineTo(this.getX(event), this.getY(event));
 
             // per modificare il colore
-            this.canvasDrawed.strokeStyle = this.color;
+            canvasDrawed.strokeStyle = this.color;
             // disegna
-            this.canvasDrawed.stroke();
+            canvasDrawed.stroke();
         }
     }
 
@@ -59,33 +63,43 @@ class Pencil {
 
     // devinisce la linea
     setLineProperties() {
-        this.canvasDrawed.lineWidth = 3;
+        canvasDrawed.lineWidth = 3;
     }
 
 
     reDraw() {
 
         if (this.isSelect) {
-            this.canvasDrawed.shadowBlur = 3;
-            this.canvasDrawed.shadowColor = "red";
+            canvasDrawed.shadowBlur = 3;
+            canvasDrawed.shadowColor = "red";
         } else {
-            this.canvasDrawed.shadowBlur = 0;
-            this.canvasDrawed.shadowColor = null;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
         }
 
-        this.setLineProperties(this.canvasDrawed);
-        this.canvasDrawed.beginPath();
+        this.setLineProperties();
+        canvasDrawed.beginPath();
         // sposto la penna su dove inizia la linea
-        this.canvasDrawed.moveTo(this.arrayX[0] - this.elementRect.left, this.arrayY[0] - this.elementRect.top);
+        canvasDrawed.moveTo(this.arrayX[0], this.arrayY[0]);
         // percorro tutti i punti in qui è passata la linea
         for (var i = 0; i < this.arrayX.length; i++) {
-            canvasDrawed.lineTo(this.arrayX[i] - this.elementRect.left, this.arrayY[i] - this.elementRect.top);
+            canvasDrawed.lineTo(this.arrayX[i], this.arrayY[i]);
             // per modificare il colore
-            this.canvasDrawed.strokeStyle = this.color;
+            canvasDrawed.strokeStyle = this.color;
             // disegna
-            this.canvasDrawed.stroke();
+            canvasDrawed.stroke();
         }
     }
+
+
+    getX(event) {
+        return Math.round((event.x - this.rect.left) * this.scaleX);
+    }
+
+    getY(event) {
+        return Math.round((event.y - this.rect.top) * this.scaleY);
+    }
+
 }
 
 
@@ -113,9 +127,3 @@ canvas.addEventListener("mouseup", function (e) {
         canDraw = lines[lines.length - 1].end(e);
     }
 });
-
-
-
-
-
-

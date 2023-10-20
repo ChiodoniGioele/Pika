@@ -5,86 +5,102 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas-test</title>
+    <style>
+      #canvas{
+        max-width: 50%;
+        max-height: 50%;
+      }
+    </style>
   </head>
-  <body>
-    <canvas id="canvas" width="500" height="500"
-      style="position: absolute; left: 0px; right: 0px; z-index: 0;background-image : url(./pika.jfif); "></canvas>
+  <body onload="actionVIsibility()">
 
-    <div style="position: absolute; left: 500px;">
-      <div>
-        <input type="radio" id="point" name="drone" value="puntini" checked />
-        <label for="puntini">puntini</label>
-      </div>
-      <div>
-        <input type="radio" id="pencil" name="drone" value="penna" />
-        <label for="penna">penna</label>
-      </div>
-      <div>
-        <input type="radio" id="rectangle" name="drone" value="rettangolo" />
-        <label for="rettangolo">rettangolo</label>
-      </div>
-      <div>
-        <input type="radio" id="circle" name="drone" value="cerchio" />
-        <label for="cerchio">cerchio</label>
-      </div>
-      <div>
-        <input type="radio" id="mousePoints" name="drone" value="mousePoints" />
-        <label for="mousePoints">Mouse Point</label>
-      </div>
-      <div>
-        <input type="radio" id="mouseRects" name="drone" value="mouseRects" />
-        <label for="mouseRects">Mouse Rects</label>
-      </div>
-      <div>
-        <input type="radio" id="mouseCircles" name="drone" value="mouseCircles" />
-        <label for="mouseCircles">Mouse Circles</label>
-      </div>
-      <div>
-        <input type="radio" id="mouseLines" name="drone" value="mouseLines" />
-        <label for="mouseLines">Mouse Lines</label>
-      </div>
+    <canvas id="canvas" 
+      style=" left: 0px; right: 0px; z-index: 0;"></canvas>
 
-      <br>
+    <div style="position: relative; " id="container">
 
-      <button id="delete" onclick="deleteElement()">Delete</button>
+      
 
-      <br>
-      <br>
+      <div id="actions">
+        <div>
+          <input type="radio" id="point" name="drone" value="puntini" checked />
+          <label for="puntini">puntini</label>
+        </div>
+        <div>
+          <input type="radio" id="pencil" name="drone" value="penna" />
+          <label for="penna">penna</label>
+        </div>
+        <div>
+          <input type="radio" id="rectangle" name="drone" value="rettangolo" />
+          <label for="rettangolo">rettangolo</label>
+        </div>
+        <div>
+          <input type="radio" id="circle" name="drone" value="cerchio" />
+          <label for="cerchio">cerchio</label>
+        </div>
+        <div>
+          <input type="radio" id="mousePoints" name="drone" value="mousePoints" />
+          <label for="mousePoints">Mouse Point</label>
+        </div>
+        <div>
+          <input type="radio" id="mouseRects" name="drone" value="mouseRects" />
+          <label for="mouseRects">Mouse Rects</label>
+        </div>
+        <div>
+          <input type="radio" id="mouseCircles" name="drone"
+            value="mouseCircles" />
+          <label for="mouseCircles">Mouse Circles</label>
+        </div>
+        <div>
+          <input type="radio" id="mouseLines" name="drone" value="mouseLines" />
+          <label for="mouseLines">Mouse Lines</label>
+        </div>
 
-      <input type="number" id="newNumPoint" min="1" max="1">
-      <button id="submitNewNumPoint" onclick="renamePoint()">Submit New Num</button>
-
-      <br>
-      <br>
-
-      <input type="color" id="color">
-      <button id="submitColor" onclick="colorElement()">Submit Color</button>
-
-      <br>
-      <br>
-
-      <button id="connectDots" onclick="connectDots()">Connect Dots</button>
-
-      <br>
-      <br>
-
-      <div>
-
-        <input type="checkbox" checked="true" id="pointLayer"
-          onclick="pointLayerCheck()">
-        <label for="pointLayer">Point Layer</label>
         <br>
-        <input type="checkbox" checked="true" id="linesLayer"
-          onclick="linesLayerCheck()">
-        <label for="linesLayer">Lines Layer</label>
+
+        <button id="delete" onclick="deleteElement()">Delete</button>
+
         <br>
-        <input type="checkbox" checked="true" id="rectLayer"
-          onclick="rectLayerCheck()">
-        <label for="rectLayer">Rects Layer</label>
         <br>
-        <input type="checkbox" checked="true" id="circleLayer"
-          onclick="circleLayerCheck()">
-        <label for="circleLayer">Circles Layer</label>
+
+        <input type="number" id="newNumPoint" min="1" max="1">
+        <button id="submitNewNumPoint" onclick="renamePoint()">Submit New Num</button>
+
+        <br>
+        <br>
+
+        <input type="color" id="color">
+        <button id="submitColor" onclick="colorElement()">Submit Color</button>
+
+        <br>
+        <br>
+
+        <button id="connectDots" onclick="connectDots()">Connect Dots</button>
+
+        <br>
+        <br>
+
+        <div>
+
+          <input type="checkbox" checked="true" id="pointLayer"
+            onclick="pointLayerCheck()">
+          <label for="pointLayer">Point Layer</label>
+          <br>
+          <input type="checkbox" checked="true" id="linesLayer"
+            onclick="linesLayerCheck()">
+          <label for="linesLayer">Lines Layer</label>
+          <br>
+          <input type="checkbox" checked="true" id="rectLayer"
+            onclick="rectLayerCheck()">
+          <label for="rectLayer">Rects Layer</label>
+          <br>
+          <input type="checkbox" checked="true" id="circleLayer"
+            onclick="circleLayerCheck()">
+          <label for="circleLayer">Circles Layer</label>
+        </div>
+
+        <input id='uploadImg' type='file' accept="image/*">
+
 
       </div>
 
@@ -95,6 +111,7 @@
       </div>
     -->
     </div>
+    <script src="./script/imageImport.js"></script>
     <!-- Source .js -->
     <script src="./script/models/point.js"></script>
     <script src="./script/models/pencil.js"></script>

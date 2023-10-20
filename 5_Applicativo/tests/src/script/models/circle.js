@@ -4,9 +4,15 @@ class Circle {
         canDraw = true;
         this.elementRect = canvas.getBoundingClientRect();
 
+        this.rect = canvas.getBoundingClientRect();
+
+        this.scaleX = canvas.width / this.rect.width;
+        this.scaleY = canvas.height / this.rect.height;
+
+
         // coordinate dell'inizio del rettangolo
-        this.startX = event.clientX - this.elementRect.left;
-        this.startY = event.clientY - this.elementRect.top;
+        this.startX = this.getX(event);
+        this.startY = this.getY(event);
 
         this.color = color;
 
@@ -19,6 +25,9 @@ class Circle {
         this.startDrawing(this.canvasDrawed);
 
         this.isSelect = false;
+
+
+
     }
 
     startDrawing() {
@@ -28,18 +37,18 @@ class Circle {
 
     move(event, canDraw) {
 
-        if(this.isSelect){
+        if (this.isSelect) {
             this.canvasDrawed.shadowBlur = 10;
             this.canvasDrawed.shadowColor = "red";
-        }else{
+        } else {
             this.canvasDrawed.shadowBlur = 0;
             this.canvasDrawed.shadowColor = null;
         }
 
 
         // coordinate di dove si trova il mouse
-        let mouseX = event.clientX - this.elementRect.left;
-        let mouseY = event.clientY - this.elementRect.top;
+        let mouseX = this.getX(event);
+        let mouseY = this.getY(event);
 
         // se posso disegnare
         if (canDraw) {
@@ -66,10 +75,10 @@ class Circle {
 
     reDraw() {
 
-        if(this.isSelect){
+        if (this.isSelect) {
             this.canvasDrawed.shadowBlur = 10;
             this.canvasDrawed.shadowColor = "red";
-        }else{
+        } else {
             this.canvasDrawed.shadowBlur = 0;
             this.canvasDrawed.shadowColor = null;
         }
@@ -86,6 +95,14 @@ class Circle {
         this.canvasDrawed.lineWidth = 10;
         // disegno
         this.canvasDrawed.stroke();
+    }
+
+    getX(event) {
+        return Math.round((event.x - this.rect.left) * this.scaleX);
+    }
+
+    getY(event) {
+        return Math.round((event.y - this.rect.top) * this.scaleY);
     }
 
 }

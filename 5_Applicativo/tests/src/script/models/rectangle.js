@@ -1,12 +1,16 @@
 class Rectangle {
+    constructor(event, canvas , color) {
 
-    constructor(event, canvas, canvasDrawed, color) {
+        this.canvas = canvas;
+
+        this.rect = this.canvas.getBoundingClientRect();
+
+        this.scaleX = this.canvas.width / this.rect.width;
+        this.scaleY = this.canvas.height / this.rect.height;
+
         canDraw = true;
-        this.elementRect = canvas.getBoundingClientRect();
-
-        // coordinate dell'inizio del rettangolo
-        this.startX = event.clientX - this.elementRect.left;
-        this.startY = event.clientY - this.elementRect.top;
+        this.startX = this.getX(event);
+        this.startY = this.getY(event);
 
         this.color = color;
 
@@ -14,47 +18,45 @@ class Rectangle {
         this.endX = 0;
         this.endY = 0;
 
-        this.canvas = canvas;
-        this.canvasDrawed = canvasDrawed;
-
-        this.startDrawing(this.canvasDrawed);
+        this.startDrawing();
 
         this.isSelect = false;
     }
 
     startDrawing() {
         // muovo la penna in x y
-        this.canvasDrawed.moveTo(this.startX, this.startY);
+        canvasDrawed.moveTo(this.startX, this.startY);
     }
 
     move(event, canDraw) {
-        // coordinate di dove si trova il mouse
-        let mouseX = event.clientX - this.elementRect.left;
-        let mouseY = event.clientY - this.elementRect.top;
 
+        let mouseX = this.getX(event);
+        let mouseY = this.getY(event);
         // se posso disegnare
         if (canDraw) {
-            this.canvasDrawed.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
-            this.canvasDrawed.beginPath();
+            
+            canvasDrawed.clearRect(0, 0, this.canvas.width, this.canvas.height); //clear canvas
+            canvasDrawed.beginPath();
+
             // larghezza attuale del rettangolo
             var width = mouseX - this.startX;
             var height = mouseY - this.startY;
 
             if(this.isSelect){
-                this.canvasDrawed.shadowBlur = 10;
-                this.canvasDrawed.shadowColor = "red";
+                canvasDrawed.shadowBlur = 10;
+                canvasDrawed.shadowColor = "red";
             }else{
-                this.canvasDrawed.shadowBlur = 0;
-                this.canvasDrawed.shadowColor = null;
+                canvasDrawed.shadowBlur = 0;
+                canvasDrawed.shadowColor = null;
             }
 
-            this.canvasDrawed.rect(this.startX, this.startY, width, height);
+            canvasDrawed.rect(this.startX, this.startY, width, height);
 
             // imposto il colore
-            this.canvasDrawed.strokeStyle = this.color;
+            canvasDrawed.strokeStyle = this.color;
 
-            this.canvasDrawed.lineWidth = 10;
-            this.canvasDrawed.stroke();
+            canvasDrawed.lineWidth = 100;
+            canvasDrawed.stroke();
             // salvo la larghezza attuale del rettangolo (che se decide ti smettere di disegnare rimane questa)
             this.endX = width;
             this.endY = height;
@@ -69,26 +71,36 @@ class Rectangle {
     reDraw() {
 
         if(this.isSelect){
-            this.canvasDrawed.shadowBlur = 10;
-            this.canvasDrawed.shadowColor = "red";
+            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowColor = "red";
         }else{
-            this.canvasDrawed.shadowBlur = 0;
-            this.canvasDrawed.shadowColor = null;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
         }
 
         // sposto la penna nel punto di partenza x y
-        this.canvasDrawed.moveTo(this.startX, this.startY);
+        canvasDrawed.moveTo(this.startX, this.startY);
 
-        this.canvasDrawed.beginPath();
+        canvasDrawed.beginPath();
         // variabili end* contengono la largheza e l altezza del rettangolo 
-        this.canvasDrawed.rect(this.startX, this.startY, this.endX, this.endY);
+        canvasDrawed.rect(this.startX, this.startY, this.endX, this.endY);
 
         // imposto il colore
-        this.canvasDrawed.strokeStyle = this.color;
-        this.canvasDrawed.lineWidth = 10;
+        canvasDrawed.strokeStyle = this.color;
+        canvasDrawed.lineWidth = 10;
         // disegno
-        this.canvasDrawed.stroke();
+        canvasDrawed.stroke();
     }
+
+    
+        getX(event){
+            return Math.round((event.x - this.rect.left) * this.scaleX);
+        }
+
+        getY(event){
+            return Math.round((event.y - this.rect.top) * this.scaleY);
+        }
+
 
 }
 
@@ -99,7 +111,7 @@ class Rectangle {
 canvas.addEventListener("mousedown", function (e) {
     // solo se CHECKBOX è selezionato puo iniziare a disegnare
     if (rectangleMode.checked) {
-        rects.push(new Rectangle(e, canvas, canvasDrawed, color));
+        rects.push(new Rectangle(e, canvas,color));
     }
 });
 
