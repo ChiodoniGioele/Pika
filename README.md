@@ -14,3 +14,5 @@ Il progetto consiste in un applicativo web per creare le immagini con i puntini 
 
 [Link Rectangle](https://jsfiddle.net/richardcwc/ukqhf54k/)
 
+test
+
