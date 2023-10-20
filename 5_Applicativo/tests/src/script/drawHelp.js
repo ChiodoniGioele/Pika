@@ -1,6 +1,8 @@
 let canvas = document.getElementById("canvas");
 let canvasDrawed = canvas.getContext('2d');
 
+let isPointConnect = false;
+
 
 let canDraw = false;    // solo se posso disegnare
 let color = "black"
@@ -34,6 +36,11 @@ function reDrawAll() {
     for (var i = 0; i < circle.length; i++) {
         circle[i].reDraw();
     }
+
+    if(isPointConnect){
+        reConnectDots();
+    }
+
 }
 
 

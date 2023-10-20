@@ -18,6 +18,10 @@ function deleteElement(){
     }else if(mouseLinesMode.checked){
         deleteLine();
     }
+    if(isPointConnect){
+
+    }
+    
 }
 
 function colorElement(){
@@ -30,5 +34,35 @@ function colorElement(){
         changeColorCircle();
     }else if(mouseLinesMode.checked){
         changeColorLine();
+    }
+}
+
+function connectDots(){
+    if(isPointConnect){
+        isPointConnect = false;
+        reDrawAll();
+    }else{
+        let oldPoint = points[0];
+        for(var point = 1; point < points.length; point++){
+            canvasDrawed.beginPath();
+            canvasDrawed.lineWidth = 3;
+            canvasDrawed.moveTo(oldPoint.x , oldPoint.y);
+            canvasDrawed.lineTo(points[point].x, points[point].y);
+            canvasDrawed.stroke();
+            oldPoint = points[point];
+        }
+        isPointConnect = true;
+    }
+}
+
+function reConnectDots(){
+    let oldPoint = points[0];
+    for(var point = 1; point < points.length; point++){
+        canvasDrawed.beginPath();
+        canvasDrawed.lineWidth = 3;
+        canvasDrawed.moveTo(oldPoint.x , oldPoint.y);
+        canvasDrawed.lineTo(points[point].x, points[point].y);
+        canvasDrawed.stroke();
+        oldPoint = points[point];
     }
 }
