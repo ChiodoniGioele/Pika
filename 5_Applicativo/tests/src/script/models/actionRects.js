@@ -31,6 +31,7 @@ function deselectRect() {
 }
 
 function selectRect(rectReturned) {
+    deselectAll();
     if (rectSelected >= 0 && rectSelected < rects.length) {
         rects[rectSelected].isSelect = false;
     }

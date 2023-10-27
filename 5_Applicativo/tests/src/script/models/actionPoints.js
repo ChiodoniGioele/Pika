@@ -49,6 +49,7 @@ function deselectPoint() {
 }
 
 function selectThisPoint(pointReturned) {
+    deselectAll();
     if (pointSelected >= 0 && pointSelected < points.length) {
         points[pointSelected].isSelect = false;
     }
@@ -61,8 +62,7 @@ function getPointClicked(event) {
     let x = Math.round((event.x - canvasBounding.left) * scaleX);
     let y = Math.round((event.y - canvasBounding.top) * scaleY);
     for (var i = 0; i < points.length; i++) {
-        if (getDistancePointClick(points[i], x, y) < points[i].dimension + 10) {
-            console.log("fatto<");
+        if (getDistancePointClick(points[i], x, y) < points[i].dimension) {
             return i;
         }
     }

@@ -31,7 +31,7 @@ class Rectangle {
             var height = mouseY - this.startY;
 
             if (this.isSelect) {
-                canvasDrawed.shadowBlur = 10;
+                canvasDrawed.shadowBlur = 30;
                 canvasDrawed.shadowColor = "red";
             } else {
                 canvasDrawed.shadowBlur = 0;
@@ -56,7 +56,7 @@ class Rectangle {
 
     reDraw() {
         if (this.isSelect) {
-            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowBlur = 30;
             canvasDrawed.shadowColor = "red";
         } else {
             canvasDrawed.shadowBlur = 0;

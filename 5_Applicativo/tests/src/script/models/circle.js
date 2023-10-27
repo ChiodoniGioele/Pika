@@ -21,7 +21,7 @@ class Circle {
     move(event, canDraw) {
         canvasDrawed.moveTo(this.startX, this.startY);
         if (this.isSelect) {
-            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowBlur = 30;
             canvasDrawed.shadowColor = "red";
         } else {
             canvasDrawed.shadowBlur = 0;
@@ -54,7 +54,7 @@ class Circle {
     reDraw() {
 
         if (this.isSelect) {
-            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowBlur = 30;
             canvasDrawed.shadowColor = "red";
         } else {
             canvasDrawed.shadowBlur = 0;

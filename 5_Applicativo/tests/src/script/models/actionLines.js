@@ -27,6 +27,7 @@ function deselectLine(){
 }
 
 function selectLine(line){
+    deselectAll();
     if (lineSelected >= 0 && lineSelected < lines.length) {
         lines[lineSelected].isSelect = false;
     }
@@ -38,7 +39,7 @@ function selectLine(line){
 function isOnALine(x, y){
     for(var i = 0; i < lines.length; i++){
         for(var j = 0; j < lines[i].arrayX.length; j++){
-            if(getDistancePointLine(lines[i].arrayX[j], lines[i].arrayY[j], x, y) < lines[i].dimension + 10){
+            if(getDistancePointLine(lines[i].arrayX[j], lines[i].arrayY[j], x, y) < lines[i].dimension){
                 return i;
             }
         }

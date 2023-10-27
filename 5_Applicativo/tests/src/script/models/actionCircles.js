@@ -28,6 +28,7 @@ function deselectCircle() {
 }
 
 function selectCircle(circleReturned) {
+    deselectAll();
     if (circleSelect >= 0 && circleSelect < circle.length) {
         circle[circleSelect].isSelect = false;
     }
