@@ -13,6 +13,7 @@ let pointLayer = document.getElementById('pointLayer');
 let pencilLayer = document.getElementById('linesLayer');
 let rectLayer = document.getElementById('rectLayer');
 let circleLayer = document.getElementById('circleLayer');
+let imgLayer = document.getElementById('imgLayer');
 
 let dimensionRange = document.getElementById("dimension");
 
@@ -44,6 +45,20 @@ function colorElement() {
         changeColorCircle();
     } else if (mouseLineMode.checked) {
         changeColorLine();
+    }else{
+        color = document.getElementById("color").value;
+    }
+}
+
+function dimensionElement(){
+    if (mouseRectsMode.checked) {
+        changeDimensionRect();
+    } else if (mousePointsMode.checked) {
+        changeDimensionPoint();
+    } else if (mouseCirclesMode.checked) {
+        changeDimensionCircle();
+    } else if (mouseLineMode.checked) {
+        changeDimensionLine();
     }
 }
 
@@ -64,6 +79,14 @@ function connectDots() {
                 canvasDrawed.stroke();
                 oldPoint = points[point];
             }
+
+            canvasDrawed.beginPath();
+            canvasDrawed.lineWidth = 3;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
+            canvasDrawed.moveTo(points[0].x, points[0].y);
+            canvasDrawed.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+            canvasDrawed.stroke();
             isPointConnect = true;
         }
     }
@@ -81,6 +104,14 @@ function reConnectDots() {
         canvasDrawed.stroke();
         oldPoint = points[point];
     }
+    canvasDrawed.beginPath();
+    canvasDrawed.lineWidth = 3;
+    canvasDrawed.shadowBlur = 0;
+    canvasDrawed.shadowColor = null;
+    canvasDrawed.moveTo(points[0].x, points[0].y);
+    canvasDrawed.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+    canvasDrawed.stroke();
+    isPointConnect = true;
 }
 
 
@@ -164,3 +195,14 @@ function circleLayerCheck() {
 
     reDrawAll();
 }
+
+function imgLayerView(){
+    if(imgLayer.checked){
+        reDrawAll();
+    }else{
+        canvasDrawed.fillStyle = "#FFFFFF";
+        canvasDrawed.fillRect(0, 0, canvas.width, canvas.height);
+        reDrawAllWhidoutClear();
+    }
+}
+

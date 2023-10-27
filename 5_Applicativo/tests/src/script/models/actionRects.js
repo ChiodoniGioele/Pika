@@ -142,5 +142,12 @@ function changeColorRect() {
     }
 }
 
+function changeDimensionRect(){
+    if (isARectSelect() && mouseRectsMode.checked) {
+        rects[rectSelected].dimension = dimensionRange.value;
+        reDrawAll();
+    }
+}
+
 
 

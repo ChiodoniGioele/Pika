@@ -69,3 +69,10 @@ function deleteLine(){
         reDrawAll();
     }
 }
+
+function changeDimensionLine(){
+    if(lineSelected >= 0 && mouseLineMode.checked){
+        lines[lineSelected].dimension = dimensionRange.value;
+        reDrawAll();
+    }
+}

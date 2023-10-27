@@ -19,8 +19,6 @@
 
     <div style="position: relative; " id="container">
 
-      
-
       <div id="actions">
         <div>
           <input type="radio" id="point" name="drone" value="puntini" checked />
@@ -81,17 +79,13 @@
         <br>
 
         <div>
-
           <input type="checkbox" checked="true" id="pointLayer"
             onclick="pointLayerCheck()">
           <label for="pointLayer">Point Layer</label>
           <br>
-
           <input type="checkbox" checked="true" id="linesLayer"
             onclick="linesLayerCheck()">
-
           <label for="linesLayer">Line Layer</label>
-          
           <br>
           <input type="checkbox" checked="true" id="rectLayer"
             onclick="rectLayerCheck()">
@@ -100,14 +94,19 @@
           <input type="checkbox" checked="true" id="circleLayer"
             onclick="circleLayerCheck()">
           <label for="circleLayer">Circles Layer</label>
+          <br>
+          <input type="checkbox" checked="true" id="imgLayer"
+          onclick="imgLayerView()">
+        <label for="imgLayer">Img Layer</label>
+
         </div>
 
-        <input type="range" min="0" max="50" id="dimension">
+        <input type="range" min="0" max="50" id="dimension" onmouseup="dimensionElement()">
 
         <br>
         <br>
 
-        <input id='uploadImg' type='file' accept="image/*">
+        <input id='uploadImg' type='file' accept=".png, .jpg, .webp">
 
         <br>
         <br>
@@ -119,30 +118,23 @@
         </select>
 
         <button id="export" onclick="exportCanvas()" >Export</button>
-
       </div>
 
-      <!--
-      <div>
-        <input type="radio" id="bucket" name="drone" value="secchiello" />
-        <label for="secchiello">secchiello</label>
-      </div>
-    -->
     </div>
     <script src="./script/imageImport.js"></script>
-    <!-- Source .js -->
     <script src="./script/imageExport.js"></script>
+
     <script src="./script/models/point.js"></script>
     <script src="./script/models/pencil.js"></script>
     <script src="./script/models/rectangle.js"></script>
     <script src="./script/models/circle.js"></script>
+
     <script src="./script/models/actionLines.js"></script>
     <script src="./script/models/actionCircles.js"></script>
     <script src="./script/models/actionPoints.js"></script>
     <script src="./script/models/actionRects.js"></script>
-    <!-- <script src="./script/models/bucket.js"></script> -->
+
     <script src="./script/drawHelp.js"></script>
-  
     <script src="./script/main.js"></script>
   </body>
 </html>

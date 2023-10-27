@@ -7,7 +7,6 @@ let scaleY = canvas.height / canvasBounding.height;
 
 let isPointConnect = false;
 
-
 let canDraw = false;    // solo se posso disegnare
 
 let color = "black"

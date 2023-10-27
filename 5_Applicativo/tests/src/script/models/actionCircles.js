@@ -120,3 +120,10 @@ function changeColorCircle() {
         reDrawAll();
     }
 }
+
+function changeDimensionCircle(){
+    if(isACircleSelect() && mouseCirclesMode.checked){
+        circle[circleSelect].dimension = dimensionRange.value;
+        reDrawAll();
+    }
+}

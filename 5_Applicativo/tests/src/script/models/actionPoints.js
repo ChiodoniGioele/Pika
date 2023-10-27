@@ -130,3 +130,10 @@ function isAPointSelected() {
     }
     return false;
 }
+
+function changeDimensionPoint(){
+    if (isAPointSelected() && mousePointsMode.checked) {
+        points[pointSelected].dimension = dimensionRange.value;
+        reDrawAll();
+    }
+}
