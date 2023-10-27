@@ -16,20 +16,23 @@ function loadImage(event) {
       var image = new Image();
       image.src = e.target.result;
       image.onload = function () {
-        canvas.style.backgroundImage = 'url("' + this.src + '") ';
-        ImgSrc = canvas.style.backgroundImage;
-        canvas.style.backgroundSize = 'contain';
-        canvas.width = this.width;
-        canvas.height = this.height;
-        document.getElementById("container").style.display='block';
-
-        canvasBounding = canvas.getBoundingClientRect();
-        scaleX = canvas.width / canvasBounding.width;
-        scaleY = canvas.height / canvasBounding.height;
-        points = new Array();
-        lines = new Array();
-        rects = new Array();
-        circle = new Array();
+        if(this.width > 250 && this.height > 150){
+          canvas.style.backgroundImage = 'url("' + this.src + '") ';
+          ImgSrc = canvas.style.backgroundImage;
+          canvas.style.backgroundSize = 'contain';
+          canvas.width = this.width;
+          canvas.height = this.height;
+          document.getElementById("container").style.display='block';
+          canvasBounding = canvas.getBoundingClientRect();
+          scaleX = canvas.width / canvasBounding.width;
+          scaleY = canvas.height / canvasBounding.height;
+          points = new Array();
+          lines = new Array();
+          rects = new Array();
+          circle = new Array();
+        }else{
+          alert("Immagine troppo piccola");
+        }
       }
     }
     reader.readAsDataURL(file);

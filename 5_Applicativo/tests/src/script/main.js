@@ -206,3 +206,11 @@ function imgLayerView(){
     }
 }
 
+function deleteAllDraw(){
+    points = new Array();
+    lines = new Array();
+    rects = new Array();
+    circle = new Array();
+    reDrawAll();
+}
+
