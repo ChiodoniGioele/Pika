@@ -57,6 +57,64 @@ function reDrawAll() {
     }
 }
 
+function reDrawAllWhidoutClear(){
+    if (pencilLayer.checked) {
+        for (var i = 0; i < lines.length; i++) {
+            lines[i].reDraw();
+        }
+    }
+
+    if (pointLayer.checked) {
+        for (var i = 0; i < points.length; i++) {
+            points[i].reDraw();
+        }
+
+        if (isPointConnect) {
+            reConnectDots();
+        }
+
+    }
+
+    if (rectLayer.checked) {
+        for (var i = 0; i < rects.length; i++) {
+            rects[i].reDraw();
+        }
+    }
+
+    if (circleLayer.checked) {
+        for (var i = 0; i < circle.length; i++) {
+            circle[i].reDraw();
+        }
+    }
+}
+
+function deselectAll(){
+    for (var i = 0; i < lines.length; i++) {
+        lines[i].isSelect = false;
+    }
+
+    for (var i = 0; i < points.length; i++) {
+        points[i].isSelect = false;
+    }
+
+    for (var i = 0; i < rects.length; i++) {
+        rects[i].isSelect = false;
+    }
+
+    for (var i = 0; i < circle.length; i++) {
+        circle[i].isSelect = false;
+    }
+
+    pointSelected = -1;
+    rectSelected = -1;
+    circleSelect = -1;
+    lineSelected = -1;
+    oldXMouseCircle = 0;
+    oldYMouseCircle = 0;
+    canMove = false;
+    oldXMouseRect = 0;
+    oldYMouseRect = 0;
+}
 
 
 
