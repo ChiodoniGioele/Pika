@@ -1,8 +1,13 @@
 let lineSelected = -1;
 canvas.addEventListener("dblclick", function (e) {
+    canvasBounding = canvas.getBoundingClientRect();
+    scaleX = canvas.width / canvasBounding.width;
+    scaleY = canvas.height / canvasBounding.height;
+
     if (mouseLineMode.checked) {
-        let x = e.clientX - canvas.getBoundingClientRect().left;
-        let y = e.clientY - canvas.getBoundingClientRect().top;
+        let x = Math.round((e.x - canvasBounding.left) * scaleX);
+        let y = Math.round((e.y - canvasBounding.top) * scaleY);
+
         let line = isOnALine(x, y);
         if(line >= 0){
             if(line == lineSelected){
@@ -33,7 +38,7 @@ function selectLine(line){
 function isOnALine(x, y){
     for(var i = 0; i < lines.length; i++){
         for(var j = 0; j < lines[i].arrayX.length; j++){
-            if(getDistancePointLine(lines[i].arrayX[j], lines[i].arrayY[j], x, y) < 15){
+            if(getDistancePointLine(lines[i].arrayX[j], lines[i].arrayY[j], x, y) < lines[i].dimension + 10){
                 return i;
             }
         }

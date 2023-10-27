@@ -22,14 +22,20 @@ function loadImage(event) {
         canvas.width = this.width;
         canvas.height = this.height;
         document.getElementById("container").style.display='block';
+
+        canvasBounding = canvas.getBoundingClientRect();
+        scaleX = canvas.width / canvasBounding.width;
+        scaleY = canvas.height / canvasBounding.height;
+        points = new Array();
+        lines = new Array();
+        rects = new Array();
+        circle = new Array();
       }
     }
     reader.readAsDataURL(file);
 
   }
-  canvasBounding = canvas.getBoundingClientRect();
-  scaleX = canvas.width / canvasBounding.width;
-  scaleY = canvas.height / canvasBounding.height;
+
 
 }
 

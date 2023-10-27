@@ -5,7 +5,6 @@ let canvasBounding = canvas.getBoundingClientRect();
 let scaleX = canvas.width / canvasBounding.width;
 let scaleY = canvas.height / canvasBounding.height;
 
-
 let isPointConnect = false;
 
 
@@ -14,12 +13,10 @@ let canDraw = false;    // solo se posso disegnare
 let color = "black"
 
 // points array manipolato nel file point.js
-var points = new Array() // array con i puntini
-
+var points = new Array(); // array con i puntini
 
 // pencil array manipolato nel file pencil.js
 var lines = new Array();
-
 
 // rectangle array manipolato nel file rectangle.js
 var rects = new Array();

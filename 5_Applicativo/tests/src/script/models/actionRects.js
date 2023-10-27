@@ -2,20 +2,18 @@ let rectSelected = -1;
 let oldXMouseRect = 0;
 let oldYMouseRect = 0;
 
-
-
-
 canvas.addEventListener("dblclick", function (e) {
+    canvasBounding = canvas.getBoundingClientRect();
+    scaleX = canvas.width / canvasBounding.width;
+    scaleY = canvas.height / canvasBounding.height;
+
     if (mouseRectsMode.checked) {
 
-        let rect = canvas.getBoundingClientRect();
-        let scaleX = canvas.width / rect.width;
-        let scaleY = canvas.height / rect.height;
-
-        let x = Math.round((e.x - rect.left) * scaleX);
-        let y = Math.round((e.y - rect.top) * scaleY);
+        let x = Math.round((e.x - canvasBounding.left) * scaleX);
+        let y = Math.round((e.y - canvasBounding.top) * scaleY);
 
         let rectReturned = isInARect(x, y);
+    
         if (rectReturned >= 0) {
             if (rectReturned == rectSelected && isARectSelect()) {
                 deselectRect();
@@ -49,18 +47,15 @@ canvas.addEventListener("mousedown", function (e) {
 
 
 canvas.addEventListener("mousemove", function (e) {
-    let rect = canvas.getBoundingClientRect();
-    let scaleX = canvas.width / rect.width;
-    let scaleY = canvas.height / rect.height;
     if (mouseRectsMode.checked && canMove && isARectSelect()) {
-        let difX = Math.round((e.x - rect.left) * scaleX) - oldXMouseRect;
-        let difY = Math.round((e.y - rect.top) * scaleY) - oldYMouseRect;
+        let difX = Math.round((e.x - canvasBounding.left) * scaleX) - oldXMouseRect;
+        let difY = Math.round((e.y - canvasBounding.top) * scaleY) - oldYMouseRect;
         rects[rectSelected].startX += difX;
         rects[rectSelected].startY += difY;
         reDrawAll();
     }
-    oldXMouseRect = Math.round((e.x - rect.left) * scaleX);
-    oldYMouseRect =  Math.round((e.y - rect.top) * scaleY);
+    oldXMouseRect = Math.round((e.x - canvasBounding.left) * scaleX);
+    oldYMouseRect =  Math.round((e.y - canvasBounding.top) * scaleY);
 });
 
 // quando rilasciato finisci di disegnare
@@ -85,7 +80,6 @@ function isInARect(x, y) {
 function isInXRect(r, x) {
     let c1 = r.startX;
     let c2 = r.startX + r.endX;
-    console.log(c1 + " " + c2 + " " + x);
     if (isBetweenRect(c1, c2, x)) {
         return true;
     }
@@ -122,13 +116,8 @@ function isARectSelect() {
 }
 
 function isSameRects(event) {
-    let rect = canvas.getBoundingClientRect();
-
-    let scaleX = canvas.width / rect.width;
-    let scaleY = canvas.height / rect.height;
-
-    let x =  Math.round((event.x - rect.left) * scaleX);
-    let y =  Math.round((event.y - rect.top) * scaleY);
+    let x =  Math.round((event.x - canvasBounding.left) * scaleX);
+    let y =  Math.round((event.y - canvasBounding.top) * scaleY);
 
     if (isInARect(x, y) == rectSelected) {
         return true;

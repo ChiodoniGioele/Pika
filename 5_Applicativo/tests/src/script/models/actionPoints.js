@@ -3,6 +3,9 @@ let pointSelected = - 1;
 let canMove = false;
 
 canvas.addEventListener("dblclick", function (e) {
+    canvasBounding = canvas.getBoundingClientRect();
+    scaleX = canvas.width / canvasBounding.width;
+    scaleY = canvas.height / canvasBounding.height;
     if (mousePointsMode.checked) {
         let pointReturned = getPointClicked(e);
         if (pointReturned != null) {
@@ -58,12 +61,11 @@ function getPointClicked(event) {
     let x = Math.round((event.x - canvasBounding.left) * scaleX);
     let y = Math.round((event.y - canvasBounding.top) * scaleY);
     for (var i = 0; i < points.length; i++) {
-        if (getDistancePointClick(points[i], x, y) < points[i].dimension) {
+        if (getDistancePointClick(points[i], x, y) < points[i].dimension + 10) {
             console.log("fatto<");
             return i;
         }
     }
-    console.log("fno");
     return null;
 }
 
@@ -120,9 +122,9 @@ function changeColorPoint() {
     }
 }
 
-function isAPointSelected(){
-    for(var i = 0; i < points.length; i++){
-        if(points[i].isSelect){
+function isAPointSelected() {
+    for (var i = 0; i < points.length; i++) {
+        if (points[i].isSelect) {
             return true;
         }
     }

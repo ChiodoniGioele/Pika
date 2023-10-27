@@ -3,9 +3,13 @@ let oldXMouseCircle = 0;
 let oldYMouseCircle = 0;
 
 canvas.addEventListener("dblclick", function (e) {
+    canvasBounding = canvas.getBoundingClientRect();
+    scaleX = canvas.width / canvasBounding.width;
+    scaleY = canvas.height / canvasBounding.height;
+
     if (mouseCirclesMode.checked) {
-        let x = e.clientX - canvas.getBoundingClientRect().left;
-        let y = e.clientY - canvas.getBoundingClientRect().top;
+        let x = Math.round((e.x - canvasBounding.left) * scaleX);
+        let y = Math.round((e.y - canvasBounding.top) * scaleY);
         let circleReturned = isInACircle(x, y);
         if (circleReturned >= 0) {
             if (circleReturned == circleSelect && isACircleSelect()) {
@@ -42,14 +46,14 @@ canvas.addEventListener("mousedown", function (e) {
 
 canvas.addEventListener("mousemove", function (e) {
     if (mouseCirclesMode.checked && canMove && isACircleSelect()) {
-        let difX = (e.clientX - canvas.getBoundingClientRect().left) - oldXMouseCircle;
-        let difY = (e.clientY - canvas.getBoundingClientRect().top) - oldYMouseCircle;
+        let difX = (Math.round((e.x - canvasBounding.left) * scaleX)) - oldXMouseCircle;
+        let difY = (Math.round((e.y - canvasBounding.top) * scaleY)) - oldYMouseCircle;
         circle[circleSelect].startX += difX;
         circle[circleSelect].startY += difY;
         reDrawAll();
     }
-    oldXMouseCircle = e.clientX - canvas.getBoundingClientRect().left;
-    oldYMouseCircle = e.clientY - canvas.getBoundingClientRect().top;
+    oldXMouseCircle = Math.round((e.x - canvasBounding.left) * scaleX);
+    oldYMouseCircle = Math.round((e.y - canvasBounding.top) * scaleY);
 });
 
 
@@ -91,8 +95,8 @@ function isACircleSelect() {
 
 
 function isSameCircle(event) {
-    let x = event.clientX - canvas.getBoundingClientRect().left;
-    let y = event.clientY - canvas.getBoundingClientRect().top;
+    let x = Math.round((event.x - canvasBounding.left) * scaleX);
+    let y = Math.round((event.y - canvasBounding.top) * scaleY);
     if (isInACircle(x, y) == circleSelect) {
         return true;
     }
