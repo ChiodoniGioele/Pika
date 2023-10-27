@@ -1,6 +1,6 @@
 let lineSelected = -1;
 canvas.addEventListener("dblclick", function (e) {
-    if (mouseLinesMode.checked) {
+    if (mouseLineMode.checked) {
         let x = e.clientX - canvas.getBoundingClientRect().left;
         let y = e.clientY - canvas.getBoundingClientRect().top;
         let line = isOnALine(x, y);
@@ -49,7 +49,7 @@ function getDistancePointLine(cX, cY, x, y) {
 }
 
 function changeColorLine(){
-    if (lineSelected >= 0 && mouseLinesMode.checked) {
+    if (lineSelected >= 0 && mouseLineMode.checked) {
         let color = document.getElementById("color").value;
         lines[lineSelected].color = color;
         reDrawAll();
@@ -57,7 +57,7 @@ function changeColorLine(){
 }
 
 function deleteLine(){
-    if (lineSelected >= 0 && mouseLinesMode.checked) {
+    if (lineSelected >= 0 && mouseLineMode.checked) {
         lines.splice(lineSelected, 1);
         lineSelected = -1;
         reDrawAll();

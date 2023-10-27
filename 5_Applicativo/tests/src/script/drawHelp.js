@@ -1,6 +1,10 @@
 let canvas = document.getElementById("canvas");
 let canvasDrawed = canvas.getContext('2d');
 
+let canvasBounding = canvas.getBoundingClientRect();
+let scaleX = canvas.width / canvasBounding.width;
+let scaleY = canvas.height / canvasBounding.height;
+
 
 let isPointConnect = false;
 

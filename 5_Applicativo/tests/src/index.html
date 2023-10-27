@@ -86,9 +86,12 @@
             onclick="pointLayerCheck()">
           <label for="pointLayer">Point Layer</label>
           <br>
+
           <input type="checkbox" checked="true" id="linesLayer"
             onclick="linesLayerCheck()">
-          <label for="linesLayer">Lines Layer</label>
+
+          <label for="linesLayer">Line Layer</label>
+          
           <br>
           <input type="checkbox" checked="true" id="rectLayer"
             onclick="rectLayerCheck()">
@@ -98,6 +101,10 @@
             onclick="circleLayerCheck()">
           <label for="circleLayer">Circles Layer</label>
         </div>
+
+        <input type="range" min="0" max="50" id="dimension">
+
+        <br>
 
         <input id='uploadImg' type='file' accept="image/*">
 

@@ -5,7 +5,7 @@ let circleMode = document.getElementById('circle');
 let mousePointsMode = document.getElementById('mousePoints');
 let mouseRectsMode = document.getElementById('mouseRects');
 let mouseCirclesMode = document.getElementById('mouseCircles');
-let mouseLinesMode = document.getElementById('mouseLines');
+let mouseLineMode = document.getElementById('mouseLines');
 // let bucketMode = document.getElementById('bucket');
 
 
@@ -14,6 +14,10 @@ let pencilLayer = document.getElementById('linesLayer');
 let rectLayer = document.getElementById('rectLayer');
 let circleLayer = document.getElementById('circleLayer');
 
+let dimensionRange = document.getElementById("dimension");
+
+
+
 function deleteElement() {
     if (mouseRectsMode.checked) {
         deleteRetc();
@@ -21,7 +25,7 @@ function deleteElement() {
         deletePoint();
     } else if (mouseCirclesMode.checked) {
         deleteCircle();
-    } else if (mouseLinesMode.checked) {
+    } else if (mouseLineMode.checked) {
         deleteLine();
     }
     if (isPointConnect) {
@@ -38,7 +42,7 @@ function colorElement() {
         changeColorPoint();
     } else if (mouseCirclesMode.checked) {
         changeColorCircle();
-    } else if (mouseLinesMode.checked) {
+    } else if (mouseLineMode.checked) {
         changeColorLine();
     }
 }
@@ -101,12 +105,12 @@ function pointLayerCheck() {
 }
 
 function linesLayerCheck() {
-    if (!pencilLayer.checked) {
+    if (!linesLayer.checked) {
         pencilMode.disabled = true;
-        mouseLinesMode.disabled = true;
+        mouseLineMode.disabled = true;
     } else {
         pencilMode.disabled = false;
-        mouseLinesMode.disabled = false;
+        mouseLineMode.disabled = false;
     }
 
     if (pencilMode.checked) {

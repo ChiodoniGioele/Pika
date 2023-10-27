@@ -27,6 +27,10 @@ function loadImage(event) {
     reader.readAsDataURL(file);
 
   }
+  canvasBounding = canvas.getBoundingClientRect();
+  scaleX = canvas.width / canvasBounding.width;
+  scaleY = canvas.height / canvasBounding.height;
+
 }
 
 fileInput.addEventListener("change", loadImage);

@@ -1,70 +1,48 @@
 class Circle {
 
-    constructor(event, canvas, canvasDrawed, color) {
-        canDraw = true;
-        this.elementRect = canvas.getBoundingClientRect();
+    constructor(event, color) {
+        this.canvasBounding = canvas.getBoundingClientRect();
 
-        this.rect = canvas.getBoundingClientRect();
+        this.scaleX = canvas.width / this.canvasBounding.width;
+        this.scaleY = canvas.height / this.canvasBounding.height;
 
-        this.scaleX = canvas.width / this.rect.width;
-        this.scaleY = canvas.height / this.rect.height;
-
-
-        // coordinate dell'inizio del rettangolo
         this.startX = this.getX(event);
         this.startY = this.getY(event);
 
-        this.color = color;
-
-        // coordinate dove finira il rettangolo (in partenza 0)
         this.raggio = 0;
 
-        this.canvas = canvas;
-        this.canvasDrawed = canvasDrawed;
-
-        this.startDrawing(this.canvasDrawed);
-
+        this.color = color;
+        canDraw = true;
         this.isSelect = false;
+        this.dimension = dimensionRange.value;
 
-
-
-    }
-
-    startDrawing() {
-        // muovo la penna in x y
-        this.canvasDrawed.moveTo(this.startX, this.startY);
     }
 
     move(event, canDraw) {
-
+        canvasDrawed.moveTo(this.startX, this.startY);
         if (this.isSelect) {
-            this.canvasDrawed.shadowBlur = 10;
-            this.canvasDrawed.shadowColor = "red";
+            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowColor = "red";
         } else {
-            this.canvasDrawed.shadowBlur = 0;
-            this.canvasDrawed.shadowColor = null;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
         }
 
-
-        // coordinate di dove si trova il mouse
         let mouseX = this.getX(event);
         let mouseY = this.getY(event);
 
-        // se posso disegnare
         if (canDraw) {
-            this.canvasDrawed.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
-            this.canvasDrawed.beginPath();
-            // larghezza attuale del rettangolo
+            canvasDrawed.clearRect(0, 0, canvas.width, canvas.height);
+            canvasDrawed.beginPath();
+
             this.raggio = Math.sqrt(Math.pow((mouseX - this.startX), 2) + Math.pow((mouseY - this.startY), 2));
 
-            this.canvasDrawed.arc(this.startX, this.startY, this.raggio, 0, 2 * Math.PI, false);
+            canvasDrawed.arc(this.startX, this.startY, this.raggio, 0, 2 * Math.PI, false);
 
-            // imposto il colore
-            this.canvasDrawed.strokeStyle = this.color;
+            canvasDrawed.strokeStyle = this.color;
 
-            this.canvasDrawed.lineWidth = 10;
-            this.canvasDrawed.stroke();
-            // salvo la larghezza attuale del rettangolo (che se decide ti smettere di disegnare rimane questa)
+            canvasDrawed.lineWidth = this.dimension;
+            canvasDrawed.stroke();
         }
 
     }
@@ -76,50 +54,44 @@ class Circle {
     reDraw() {
 
         if (this.isSelect) {
-            this.canvasDrawed.shadowBlur = 10;
-            this.canvasDrawed.shadowColor = "red";
+            canvasDrawed.shadowBlur = 10;
+            canvasDrawed.shadowColor = "red";
         } else {
-            this.canvasDrawed.shadowBlur = 0;
-            this.canvasDrawed.shadowColor = null;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
         }
 
-        // sposto la penna nel punto di partenza x y
-        this.canvasDrawed.moveTo(this.startX, this.startY);
+        canvasDrawed.moveTo(this.startX, this.startY);
 
-        this.canvasDrawed.beginPath();
-        // variabili end* contengono la largheza e l altezza del rettangolo 
-        this.canvasDrawed.arc(this.startX, this.startY, this.raggio, 0, 2 * Math.PI, false);
+        canvasDrawed.beginPath();
 
-        // imposto il colore
-        this.canvasDrawed.strokeStyle = this.color;
-        this.canvasDrawed.lineWidth = 10;
-        // disegno
-        this.canvasDrawed.stroke();
+        canvasDrawed.arc(this.startX, this.startY, this.raggio, 0, 2 * Math.PI, false);
+
+        canvasDrawed.strokeStyle = this.color;
+        canvasDrawed.lineWidth = this.dimension;
+
+        canvasDrawed.stroke();
     }
 
     getX(event) {
-        return Math.round((event.x - this.rect.left) * this.scaleX);
+        return Math.round((event.x - this.canvasBounding.left) * this.scaleX);
     }
 
     getY(event) {
-        return Math.round((event.y - this.rect.top) * this.scaleY);
+        return Math.round((event.y - this.canvasBounding.top) * this.scaleY);
     }
 
 }
 
 
 
-// event 
-// quando premuto start disegno
 canvas.addEventListener("mousedown", function (e) {
-    // solo se CHECKBOX è selezionato puo iniziare a disegnare
     if (circleMode.checked) {
         circle.push(new Circle(e, canvas, canvasDrawed, color));
     }
 });
 
 
-// se si muove traccia linea
 canvas.addEventListener("mousemove", function (e) {
     if (circleMode.checked && circle.length >= 1) {
         circle[circle.length - 1].move(e, canDraw);
@@ -128,7 +100,6 @@ canvas.addEventListener("mousemove", function (e) {
 });
 
 
-// quando rilasciato finisci di disegnare
 canvas.addEventListener("mouseup", function (e) {
     if (circleMode.checked && circle.length >= 1) {
         canDraw = circle[circle.length - 1].end();

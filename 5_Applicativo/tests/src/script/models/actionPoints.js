@@ -24,8 +24,8 @@ canvas.addEventListener("mousedown", function (e) {
 // se si muove traccia linea
 canvas.addEventListener("mousemove", function (e) {
     if (mousePointsMode.checked && canMove && isAPointSelected()) {
-        points[pointSelected].x = e.clientX - canvas.getBoundingClientRect().left;
-        points[pointSelected].y = e.clientY - canvas.getBoundingClientRect().top;
+        points[pointSelected].x = Math.round((e.x - canvasBounding.left) * scaleX);
+        points[pointSelected].y = Math.round((e.y - canvasBounding.top) * scaleY);
         reDrawAll();
     }
 });
@@ -55,13 +55,15 @@ function selectThisPoint(pointReturned) {
 }
 
 function getPointClicked(event) {
-    let x = event.clientX - canvas.getBoundingClientRect().left;
-    let y = event.clientY - canvas.getBoundingClientRect().top;
+    let x = Math.round((event.x - canvasBounding.left) * scaleX);
+    let y = Math.round((event.y - canvasBounding.top) * scaleY);
     for (var i = 0; i < points.length; i++) {
-        if (getDistancePointClick(points[i], x, y) < 20) {
+        if (getDistancePointClick(points[i], x, y) < points[i].dimension) {
+            console.log("fatto<");
             return i;
         }
     }
+    console.log("fno");
     return null;
 }
 
@@ -72,9 +74,9 @@ function getDistancePointClick(point, x, y) {
 }
 
 function isSamePoint(event, point) {
-    let x = event.clientX - canvas.getBoundingClientRect().left;
-    let y = event.clientY - canvas.getBoundingClientRect().top;
-    if (getDistancePointClick(points[point], x, y) < 20) {
+    let x = Math.round((event.x - canvasBounding.left) * scaleX);
+    let y = Math.round((event.y - canvasBounding.top) * scaleY);
+    if (getDistancePointClick(points[point], x, y) < dimension.value * 10) {
         return true;
     } else {
         return false;
