@@ -60,16 +60,14 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-2">
-                <div class="card w-50" style="width: 18rem;">
+
+                <div class="card w-75 " style="width: 18rem;">
                     <div class="card-header">
                         Strumenti
                     </div>
-
-                    <div class="btn-group-vertical">
-
-
-                        <input type="radio" class="btn-check btn-secondary border border-2 rounded-3"
-                            name="options-outlined" id="Point" autocomplete="off" checked>
+                    <div class="btn-group-vertical m-2">
+                        <input type="radio" class="btn-check btn-secondary" name="options-outlined" id="Point"
+                            autocomplete="off" checked>
                         <label class="btn btn-outline-secondary" for="Point">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-dot" viewBox="0 0 16 16">
@@ -78,8 +76,8 @@
                             Point
                         </label>
 
-                        <input type="radio" class="btn-check btn-secondary border border-2 rounded-3"
-                            name="options-outlined" id="Pencil" autocomplete="off">
+                        <input type="radio" class="btn-check btn-secondary" name="options-outlined" id="Pencil"
+                            autocomplete="off">
                         <label class="btn btn-outline-secondary" for="Pencil">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil" viewBox="0 0 16 16">
@@ -89,8 +87,8 @@
                             Pencil
                         </label>
 
-                        <input type="radio" class="btn-check btn-secondary border border-2 rounded-3"
-                            name="options-outlined" id="Rectangle" autocomplete="off">
+                        <input type="radio" class="btn-check btn-secondary " name="options-outlined" id="Rectangle"
+                            autocomplete="off">
                         <label class="btn btn-outline-secondary" for="Rectangle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-square" viewBox="0 0 16 16">
@@ -100,8 +98,8 @@
                             Rectangle
                         </label>
 
-                        <input type="radio" class="btn-check btn-secondary border border-2 rounded-3"
-                            name="options-outlined" id="Circle" autocomplete="off">
+                        <input type="radio" class="btn-check btn-secondary " name="options-outlined" id="Circle"
+                            autocomplete="off">
                         <label class="btn btn-outline-secondary" for="Circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-circle" viewBox="0 0 16 16">
@@ -109,12 +107,72 @@
                             </svg>
                             Circle
                         </label>
+                    </div>
 
-                        
+                    <div class="form-check form-switch mx-auto mt-1 mb-2">
+                        <input class="form-check-input" type="checkbox" id="edit">
+                        <label class="form-check-label" for="edit">Edit</label>
+                    </div>
+                    <div class="border-top"></div>
+                    <button type="button" class="btn btn-outline-primary m-2">Connect Points</button>
 
+                    <button type="button" class="btn btn-outline-danger m-2">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                            <path
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                        </svg>
+                        Delete ALL
+                    </button>
+
+                </div>
+
+
+                <div class="card w-75 mt-4" style="width: 18rem;">
+                    <div class="card-header">
+                        Layer
+                    </div>
+                    <div class="m-2 ms-4 w-100">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="PointsLayer" checked>
+                            <label class="form-check-label ms-2" for="PointsLayer">
+                                Points
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="LinesLayer" checked>
+                            <label class="form-check-label ms-2" for="LinesLayer">
+                                Lines
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="RectLayer" checked>
+                            <label class="form-check-label ms-2" for="RectLayer">
+                                Rectangle
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="CircleLayer" checked>
+                            <label class="form-check-label ms-2" for="CircleLayer">
+                                Circle
+                            </label>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
+
+
+
+
+
 
             <div class="col">
                 <canvas></canvas>
@@ -172,10 +230,10 @@
             <div class="row">
                 <footer
                     class="d-flex flex-wrap justify-content-between align-items-center  py-3 my-4 border-top fixed-bottom">
-                    <div class="col-md-4 d-flex align-items-center">
+                    <div class="col-md-4 d-flex align-items-center ms-5 ps-5">
                         <p class="text-muted footer-text">© 2023 SAMT, Gioele Chiodoni</p>
                     </div>
-                    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex footer-icons">
+                    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex footer-icons me-5 pe-5">
                         <li class="ms-3"><a class="text-muted" href="#">
                                 <a class="text-muted" href="https://github.com/ChiodoniGioele/Pika">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
