@@ -7,7 +7,7 @@ canvas.addEventListener("dblclick", function (e) {
     scaleX = canvas.width / canvasBounding.width;
     scaleY = canvas.height / canvasBounding.height;
 
-    if (mouseCirclesMode.checked) {
+    if (circleMode.checked && edidtMode.checked) {
         let x = Math.round((e.x - canvasBounding.left) * scaleX);
         let y = Math.round((e.y - canvasBounding.top) * scaleY);
         let circleReturned = isInACircle(x, y);
@@ -39,14 +39,14 @@ function selectCircle(circleReturned) {
 }
 
 canvas.addEventListener("mousedown", function (e) {
-    if (mouseCirclesMode.checked && isACircleSelect()) {
+    if (circleMode.checked && edidtMode.checked && isACircleSelect()) {
         canMove = isSameCircle(e);
     }
 });
 
 
 canvas.addEventListener("mousemove", function (e) {
-    if (mouseCirclesMode.checked && canMove && isACircleSelect()) {
+    if (circleMode.checked && edidtMode.checked && canMove && isACircleSelect()) {
         let difX = (Math.round((e.x - canvasBounding.left) * scaleX)) - oldXMouseCircle;
         let difY = (Math.round((e.y - canvasBounding.top) * scaleY)) - oldYMouseCircle;
         circle[circleSelect].startX += difX;
@@ -59,7 +59,7 @@ canvas.addEventListener("mousemove", function (e) {
 
 
 canvas.addEventListener("mouseup", function (e) {
-    if (mouseCirclesMode.checked && isACircleSelect()) {
+    if (circleMode.checked && edidtMode.checked && isACircleSelect()) {
         canMove = false;
         oldXMouseCircle = 0;
         oldXMouseCircle = 0;
@@ -106,7 +106,7 @@ function isSameCircle(event) {
 
 function deleteCircle() {
     console.log(isACircleSelect());
-    if (isACircleSelect() && mouseCirclesMode.checked) {
+    if (isACircleSelect() && circleMode.checked && edidtMode.checked) {
         circle.splice(circleSelect, 1);
         circleSelect = -1;
         reDrawAll();
@@ -114,7 +114,7 @@ function deleteCircle() {
 }
 
 function changeColorCircle() {
-    if (isACircleSelect() && mouseCirclesMode.checked) {
+    if (isACircleSelect() && circleMode.checked && edidtMode.checked) {
         let color = document.getElementById("color").value;
         circle[circleSelect].color = color;
         reDrawAll();
@@ -122,7 +122,7 @@ function changeColorCircle() {
 }
 
 function changeDimensionCircle(){
-    if(isACircleSelect() && mouseCirclesMode.checked){
+    if(isACircleSelect() && circleMode.checked && edidtMode.checked){
         circle[circleSelect].dimension = dimensionRange.value;
         reDrawAll();
     }

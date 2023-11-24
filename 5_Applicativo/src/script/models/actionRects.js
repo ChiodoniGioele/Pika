@@ -7,7 +7,7 @@ canvas.addEventListener("dblclick", function (e) {
     scaleX = canvas.width / canvasBounding.width;
     scaleY = canvas.height / canvasBounding.height;
 
-    if (mouseRectsMode.checked) {
+    if (rectangleMode.checked && edidtMode.checked) {
 
         let x = Math.round((e.x - canvasBounding.left) * scaleX);
         let y = Math.round((e.y - canvasBounding.top) * scaleY);
@@ -41,14 +41,14 @@ function selectRect(rectReturned) {
 }
 
 canvas.addEventListener("mousedown", function (e) {
-    if (mouseRectsMode.checked && isARectSelect()) {
+    if (rectangleMode.checked && edidtMode.checked && isARectSelect()) {
         canMove = isSameRects(e);
     }
 });
 
 
 canvas.addEventListener("mousemove", function (e) {
-    if (mouseRectsMode.checked && canMove && isARectSelect()) {
+    if (rectangleMode.checked && edidtMode.checked && canMove && isARectSelect()) {
         let difX = Math.round((e.x - canvasBounding.left) * scaleX) - oldXMouseRect;
         let difY = Math.round((e.y - canvasBounding.top) * scaleY) - oldYMouseRect;
         rects[rectSelected].startX += difX;
@@ -61,7 +61,7 @@ canvas.addEventListener("mousemove", function (e) {
 
 // quando rilasciato finisci di disegnare
 canvas.addEventListener("mouseup", function (e) {
-    if (mouseRectsMode.checked && isARectSelect()) {
+    if (rectangleMode.checked && edidtMode.checked && isARectSelect()) {
         canMove = false;
         oldXMouseRect = 0;
         oldYMouseRect = 0;
@@ -127,7 +127,7 @@ function isSameRects(event) {
 }
 
 function deleteRetc() {
-    if (isARectSelect() && mouseRectsMode.checked) {
+    if (isARectSelect() && rectangleMode.checked && edidtMode.checked) {
         rects.splice(rectSelected, 1);
         rectSelected = -1;
         reDrawAll();
@@ -135,7 +135,7 @@ function deleteRetc() {
 }
 
 function changeColorRect() {
-    if (isARectSelect() && mouseRectsMode.checked) {
+    if (isARectSelect() && rectangleMode.checked && edidtMode.checked) {
         let color = document.getElementById("color").value;
         rects[rectSelected].color = color;
         reDrawAll();
@@ -143,7 +143,7 @@ function changeColorRect() {
 }
 
 function changeDimensionRect(){
-    if (isARectSelect() && mouseRectsMode.checked) {
+    if (isARectSelect() && rectangleMode.checked && edidtMode.checked) {
         rects[rectSelected].dimension = dimensionRange.value;
         reDrawAll();
     }

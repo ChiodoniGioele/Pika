@@ -86,14 +86,14 @@ class Circle {
 
 
 canvas.addEventListener("mousedown", function (e) {
-    if (circleMode.checked) {
+    if (circleMode.checked && !edidtMode.checked) {
         circle.push(new Circle(e, canvas, canvasDrawed, color));
     }
 });
 
 
 canvas.addEventListener("mousemove", function (e) {
-    if (circleMode.checked && circle.length >= 1) {
+    if (circleMode.checked && !edidtMode.checked && circle.length >= 1) {
         circle[circle.length - 1].move(e, canDraw);
         reDrawAll();
     }
@@ -101,7 +101,7 @@ canvas.addEventListener("mousemove", function (e) {
 
 
 canvas.addEventListener("mouseup", function (e) {
-    if (circleMode.checked && circle.length >= 1) {
+    if (circleMode.checked && !edidtMode.checked && circle.length >= 1) {
         canDraw = circle[circle.length - 1].end();
         reDrawAll();
     }

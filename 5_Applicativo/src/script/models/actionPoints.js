@@ -6,7 +6,7 @@ canvas.addEventListener("dblclick", function (e) {
     canvasBounding = canvas.getBoundingClientRect();
     scaleX = canvas.width / canvasBounding.width;
     scaleY = canvas.height / canvasBounding.height;
-    if (mousePointsMode.checked) {
+    if (pointMode.checked && edidtMode.checked) {
         let pointReturned = getPointClicked(e);
         if (pointReturned != null) {
             if (pointReturned == pointSelected && isAPointSelected()) {
@@ -19,14 +19,14 @@ canvas.addEventListener("dblclick", function (e) {
 });
 
 canvas.addEventListener("mousedown", function (e) {
-    if (mousePointsMode.checked && isAPointSelected()) {
+    if (pointMode.checked && edidtMode.checked && isAPointSelected()) {
         canMove = isSamePoint(e, pointSelected);
     }
 });
 
 // se si muove traccia linea
 canvas.addEventListener("mousemove", function (e) {
-    if (mousePointsMode.checked && canMove && isAPointSelected()) {
+    if (pointMode.checked && edidtMode.checked && canMove && isAPointSelected()) {
         points[pointSelected].x = Math.round((e.x - canvasBounding.left) * scaleX);
         points[pointSelected].y = Math.round((e.y - canvasBounding.top) * scaleY);
         reDrawAll();
@@ -35,7 +35,7 @@ canvas.addEventListener("mousemove", function (e) {
 
 // quando rilasciato finisci di disegnare
 canvas.addEventListener("mouseup", function (e) {
-    if (mousePointsMode.checked) {
+    if (pointMode.checked && edidtMode.checked) {
         if (isAPointSelected()) {
             canMove = false;
         }
@@ -86,7 +86,7 @@ function isSamePoint(event, point) {
 }
 
 function deletePoint() {
-    if (isAPointSelected() && mousePointsMode.checked) {
+    if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         points.splice(points[pointSelected].num - 1, 1);
         for (let i = 0; i < points.length; i++) {
             points[i].num = i + 1;
@@ -97,7 +97,7 @@ function deletePoint() {
 }
 
 function renamePoint() {
-    if (isAPointSelected() && mousePointsMode.checked) {
+    if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         let newPos = document.getElementById("newNumPoint").value;
         let p = points[pointSelected];
         deletePoint();
@@ -115,7 +115,7 @@ function renamePoint() {
 }
 
 function changeColorPoint() {
-    if (isAPointSelected() && mousePointsMode.checked) {
+    if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         let color = document.getElementById("color").value;
         points[pointSelected].color = color;
         reDrawAll();
@@ -132,7 +132,7 @@ function isAPointSelected() {
 }
 
 function changeDimensionPoint(){
-    if (isAPointSelected() && mousePointsMode.checked) {
+    if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         points[pointSelected].dimension = dimensionRange.value;
         reDrawAll();
     }

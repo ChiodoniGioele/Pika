@@ -85,14 +85,14 @@ class Rectangle {
 
 
 canvas.addEventListener("mousedown", function (e) {
-    if (rectangleMode.checked) {
+    if (rectangleMode.checked && !edidtMode.checked) {
         rects.push(new Rectangle(e, canvas, color));
     }
 });
 
 
 canvas.addEventListener("mousemove", function (e) {
-    if (rectangleMode.checked && rects.length >= 1) {
+    if (rectangleMode.checked && !edidtMode.checked && rects.length >= 1) {
         rects[rects.length - 1].move(e, canDraw);
         reDrawAll();
     }
@@ -100,7 +100,7 @@ canvas.addEventListener("mousemove", function (e) {
 
 
 canvas.addEventListener("mouseup", function (e) {
-    if (rectangleMode.checked && rects.length >= 1) {
+    if (rectangleMode.checked && !edidtMode.checked && rects.length >= 1) {
         canDraw = rects[rects.length - 1].end();
         reDrawAll();
     }

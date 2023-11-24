@@ -4,7 +4,7 @@ canvas.addEventListener("dblclick", function (e) {
     scaleX = canvas.width / canvasBounding.width;
     scaleY = canvas.height / canvasBounding.height;
 
-    if (mouseLineMode.checked) {
+    if (pencilMode.checked && edidtMode.checked) {
         let x = Math.round((e.x - canvasBounding.left) * scaleX);
         let y = Math.round((e.y - canvasBounding.top) * scaleY);
 
@@ -55,7 +55,7 @@ function getDistancePointLine(cX, cY, x, y) {
 }
 
 function changeColorLine(){
-    if (lineSelected >= 0 && mouseLineMode.checked) {
+    if (lineSelected >= 0 && pencilMode.checked && edidtMode.checked) {
         let color = document.getElementById("color").value;
         lines[lineSelected].color = color;
         reDrawAll();
@@ -63,7 +63,7 @@ function changeColorLine(){
 }
 
 function deleteLine(){
-    if (lineSelected >= 0 && mouseLineMode.checked) {
+    if (lineSelected >= 0 && pencilMode.checked && edidtMode.checked) {
         lines.splice(lineSelected, 1);
         lineSelected = -1;
         reDrawAll();
@@ -71,7 +71,7 @@ function deleteLine(){
 }
 
 function changeDimensionLine(){
-    if(lineSelected >= 0 && mouseLineMode.checked){
+    if(lineSelected >= 0 && pencilMode.checked && edidtMode.checked){
         lines[lineSelected].dimension = dimensionRange.value;
         reDrawAll();
     }

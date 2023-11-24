@@ -92,21 +92,21 @@ class Pencil {
 
 
 canvas.addEventListener("mousedown", function (e) {
-    if (pencilMode.checked) {
+    if (pencilMode.checked && !edidtMode.checked) {
         lines.push(new Pencil(e, color));
     }
 });
 
 
 canvas.addEventListener("mousemove", function (e) {
-    if (pencilMode.checked && lines.length >= 1) {
+    if (pencilMode.checked && !edidtMode.checked && lines.length >= 1) {
         lines[lines.length - 1].move(e, canDraw);
     }
 });
 
 
 canvas.addEventListener("mouseup", function (e) {
-    if (pencilMode.checked && lines.length >= 1) {
+    if (pencilMode.checked && !edidtMode.checked && lines.length >= 1) {
         canDraw = lines[lines.length - 1].end(e);
     }
 });

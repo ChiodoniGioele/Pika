@@ -31,7 +31,7 @@ function loadImage(event) {
           rects = new Array();
           circle = new Array();
         }else{
-          alert("Immagine troppo piccola");
+          openLoadError();
         }
       }
     }
@@ -43,3 +43,14 @@ function loadImage(event) {
 }
 
 fileInput.addEventListener("change", loadImage);
+
+
+function closeLoadError(){
+  document.getElementById("loadError").classList.remove("visible");
+  document.getElementById("loadError").classList.add("invisible");
+}
+
+function openLoadError(){
+  document.getElementById("loadError").classList.remove("invisible");
+  document.getElementById("loadError").classList.add("visible");
+}
