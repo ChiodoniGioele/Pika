@@ -202,5 +202,16 @@ function deleteAllDraw() {
     circle = new Array();
     isPointConnect = false;
     reDrawAll();
+    closeDeleteAll();
+}
+
+function closeDeleteAll(){
+    document.getElementById("deleteAllPannel").classList.remove("visible");
+    document.getElementById("deleteAllPannel").classList.add("invisible");
+}
+
+function wantDeleteAll(){
+    document.getElementById("deleteAllPannel").classList.remove("invisible");
+    document.getElementById("deleteAllPannel").classList.add("visible");
 }
 

@@ -22,7 +22,6 @@ function loadImage(event) {
           canvas.style.backgroundSize = 'contain';
           canvas.width = this.width;
           canvas.height = this.height;
-      //  document.getElementById("container").style.display='block';
           canvasBounding = canvas.getBoundingClientRect();
           scaleX = canvas.width / canvasBounding.width;
           scaleY = canvas.height / canvasBounding.height;
@@ -30,6 +29,10 @@ function loadImage(event) {
           lines = new Array();
           rects = new Array();
           circle = new Array();
+          canvas.classList.remove("invisible");
+          document.getElementById("allertUpLoad").classList.remove("visible");
+          document.getElementById("allertUpLoad").classList.add("invisible");
+          canvas.classList.add("visible");
         }else{
           openLoadError();
         }
