@@ -162,9 +162,10 @@
                         <label class="form-check-label" for="edit">Edit</label>
                     </div>
                     <div class="border-top"></div>
-                    <button type="button" class="btn btn-outline-primary m-2">Connect Points</button>
+                    <button type="button" class="btn btn-outline-primary m-2" id="connectDots"
+                        onclick="connectDots()">Connect Points</button>
 
-                    <button type="button" class="btn btn-outline-danger m-2">
+                    <button type="button" class="btn btn-outline-danger m-2" id="deleteAll" onclick="deleteAllDraw()">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-trash" viewBox="0 0 16 16">
@@ -185,35 +186,40 @@
                     </div>
                     <div class="m-2 ms-4 w-100">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="PointsLayer" checked onclick="pointLayerCheck()">
+                            <input class="form-check-input" type="checkbox" value="" id="PointsLayer" checked
+                                onclick="pointLayerCheck()">
                             <label class="form-check-label ms-2" for="PointsLayer">
                                 Points
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="LinesLayer" checked onclick="linesLayerCheck()">
+                            <input class="form-check-input" type="checkbox" value="" id="LinesLayer" checked
+                                onclick="linesLayerCheck()">
                             <label class="form-check-label ms-2" for="LinesLayer">
                                 Lines
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="RectLayer" checked onclick="rectLayerCheck()">
+                            <input class="form-check-input" type="checkbox" value="" id="RectLayer" checked
+                                onclick="rectLayerCheck()">
                             <label class="form-check-label ms-2" for="RectLayer">
                                 Rectangle
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="CircleLayer" checked  onclick="circleLayerCheck()">
+                            <input class="form-check-input" type="checkbox" value="" id="CircleLayer" checked
+                                onclick="circleLayerCheck()">
                             <label class="form-check-label ms-2" for="CircleLayer">
                                 Circle
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ImgLayer" checked onclick="imgLayerView()">
+                            <input class="form-check-input" type="checkbox" value="" id="ImgLayer" checked
+                                onclick="imgLayerView()">
                             <label class="form-check-label ms-2" for="ImgLayer">
                                 Image
                             </label>
@@ -229,10 +235,14 @@
 
 
 
-
+            <!--class="bg-primary h-75 w-75"-->
 
             <div class="col">
-                <canvas id="canvas" class="bg-primary h-75 w-75"></canvas>
+
+                
+
+                    <canvas id="canvas" style=" left: 0px; right: 0px; max-height: 75vh;"  class="border mw-100 z-0"></canvas>
+                
 
                 <div tabindex="-1" class="z-3 position-absolute top-50 start-50 translate-middle invisible"
                     id="savePannel">
@@ -271,8 +281,8 @@
 
             </div>
 
-            <div class="col-2">
-                <div class="card" style="width: 18rem;">
+            <div class="col-2 ms-5">
+                <div class="card m-2" >
 
                     <div class="card-header">
                         Point 1
@@ -281,7 +291,8 @@
                     <ul class="list-group list-group-flush">
 
                         <li class="list-group-item ">
-                            <button type="button" class="btn btn-outline-danger w-100">
+                            <button type="button" class="btn btn-outline-danger w-100" id="delete"
+                                onclick="deleteElement()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">
                                     <path
@@ -297,22 +308,24 @@
 
                         <li class="list-group-item ">
                             <div class="input-group w-100">
-                                <input type="color" class="form-control form-control-color form-control"
-                                    id="exampleColorInput" value="" title="Choose your color">
+                                <input type="color" class="form-control form-control-color form-control" id="color"
+                                    onclick="colorElement()" onchange="colorElement()" value=""
+                                    title="Choose your color">
                                 <span class="input-group-text form-control" id="basic-addon2">Choose your color</span>
                             </div>
                         </li>
 
                         <li class="list-group-item">
                             <div class="input-group mb-3">
-                                <button class="btn btn-outline-secondary" type="button"
-                                    id="button-addon1">Submit</button>
-                                <input type="number" class="form-control active " id="newNumPoint">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon1"
+                                    id="submitNewNumPoint" onclick="renamePoint()">Submit</button>
+                                <input type="number" min="1" max="1" class="form-control active " id="newNumPoint"">
                             </div>
                         </li>
 
-                        <li class="list-group-item">
-                            <input type="range" min="0" max="50" class="w-100" id="dimension">
+                        <li class=" list-group-item">
+                                <input type="range" min="0" max="50" class="w-100" id="dimension"
+                                    onchange="dimensionElement()">
                         </li>
                     </ul>
                 </div>

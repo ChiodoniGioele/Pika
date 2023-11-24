@@ -11,13 +11,13 @@ function save(){
 
     link.download = name + '.' + format;
 
-    //canvasDrawed.fillStyle = "#FFFFFF";
-    //canvasDrawed.fillRect(0, 0, canvas.width, canvas.height);
-    //deselectAll();
-    //reDrawAllWhidoutClear();
+    canvasDrawed.fillStyle = "#FFFFFF";
+    canvasDrawed.fillRect(0, 0, canvas.width, canvas.height);
+    deselectAll();
+    reDrawAllWhidoutClear();
     link.href = document.getElementById('canvas').toDataURL()
     link.click();
-    //reDrawAll();
+    reDrawAll();
     closeSave();
     saveSuccess();
 }

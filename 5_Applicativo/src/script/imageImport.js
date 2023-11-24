@@ -22,7 +22,7 @@ function loadImage(event) {
           canvas.style.backgroundSize = 'contain';
           canvas.width = this.width;
           canvas.height = this.height;
-          document.getElementById("container").style.display='block';
+      //  document.getElementById("container").style.display='block';
           canvasBounding = canvas.getBoundingClientRect();
           scaleX = canvas.width / canvasBounding.width;
           scaleY = canvas.height / canvasBounding.height;
