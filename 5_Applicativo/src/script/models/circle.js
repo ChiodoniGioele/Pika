@@ -1,5 +1,16 @@
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ *
+ * Classe Circle rappresenta un oggetto cerchio da disegnare
+ *
+ */
 class Circle {
 
+    /**
+     * @param event coordinate del click
+     * @param color colore del cerchio
+     */
     constructor(event, color) {
         this.canvasBounding = canvas.getBoundingClientRect();
 
@@ -18,8 +29,14 @@ class Circle {
 
     }
 
+    /**
+     * Per muovere un cerchio quando viene disegnato
+     * @param event nuove coordinate
+     * @param canDraw se si puo muovere
+     */
     move(event, canDraw) {
         canvasDrawed.moveTo(this.startX, this.startY);
+
         if (this.isSelect) {
             canvasDrawed.shadowBlur = 30;
             canvasDrawed.shadowColor = "red";
@@ -31,6 +48,7 @@ class Circle {
         let mouseX = this.getX(event);
         let mouseY = this.getY(event);
 
+        // se puo essere disegnato
         if (canDraw) {
             canvasDrawed.clearRect(0, 0, canvas.width, canvas.height);
             canvasDrawed.beginPath();
@@ -47,10 +65,17 @@ class Circle {
 
     }
 
+    /**
+     *
+     * @returns {boolean} non puo piu disegnare
+     */
     end() {
         return false;
     }
 
+    /**
+     * per rideisegnare i cerchi gia disegnati
+     */
     reDraw() {
 
         if (this.isSelect) {
@@ -73,10 +98,20 @@ class Circle {
         canvasDrawed.stroke();
     }
 
+    /**
+     *
+     * @param event clock
+     * @returns {number} coordinata x
+     */
     getX(event) {
         return Math.round((event.x - this.canvasBounding.left) * this.scaleX);
     }
 
+    /**
+     *
+     * @param event click
+     * @returns {number} la coordinata y
+     */
     getY(event) {
         return Math.round((event.y - this.canvasBounding.top) * this.scaleY);
     }
@@ -84,22 +119,25 @@ class Circle {
 }
 
 
-
+// quando viene premuto il mouse
 canvas.addEventListener("mousedown", function (e) {
+    // se e in modalita per disegnare i cerchi
     if (circleMode.checked && !edidtMode.checked) {
         circle.push(new Circle(e, canvas, canvasDrawed, color));
     }
 });
 
 
+// quando muove il mouse per disegnare il cerchio
 canvas.addEventListener("mousemove", function (e) {
+    // se e in modalita per disegnare i cerchi
     if (circleMode.checked && !edidtMode.checked && circle.length >= 1) {
         circle[circle.length - 1].move(e, canDraw);
         reDrawAll();
     }
 });
 
-
+// quando finisce di disegnare il cerchio
 canvas.addEventListener("mouseup", function (e) {
     if (circleMode.checked && !edidtMode.checked && circle.length >= 1) {
         canDraw = circle[circle.length - 1].end();

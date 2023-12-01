@@ -42,7 +42,6 @@
                             LOAD
                         </label>
 
-
                         <button type="button" class="btn btn-outline-success" onclick="openSave()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-download" viewBox="0 0 16 16">
@@ -106,7 +105,7 @@
 
 
         <div class="row">
-            <div class="col-1"></div>
+                <div class="col-1"></div>
             <div class="col-2">
 
                 <div class="card w-75 " style="width: 18rem;">
@@ -244,16 +243,16 @@
                     class="border mw-100 z-0 invisible"></canvas>
 
 
-                <div class="alert alert-info w-50 start-50 top-25  translate-middle ps-5 visible" role="alert"
-                    id="allertUpLoad">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-info-circle me-3" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                        <path
-                            d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                    </svg>
-                    Upload an image
-                </div>
+                    <div class="alert alert-info w-50 start-50 top-25  translate-middle ps-5 visible" role="alert"
+                        id="allertUpLoad">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-info-circle me-3" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                            <path
+                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                        </svg>
+                        Upload an image
+                    </div>
 
                 <div tabindex="-1" class="z-3 position-absolute top-50 start-50 translate-middle invisible"
                     id="savePannel">
@@ -282,7 +281,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                                <button type="button" class="btn btn-primary" onclick="imageExport()">Save</button>
                             </div>
                         </div>
                     </div>
@@ -303,7 +302,7 @@
                                 <p>Are you sure you want to delete everything ? </p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-danger m-2" id="deleteAll" onclick="deleteAllDraw()">
+                                <button type="button" class="btn btn-outline-danger m-2" id="deleteAllConferma" onclick="deleteAllDraw()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-trash" viewBox="0 0 16 16">
                                         <path
@@ -326,7 +325,7 @@
                 <div class="card m-2">
 
                     <div class="card-header">
-                        Point 1
+                        Modifica
                     </div>
 
                     <ul class="list-group list-group-flush">
@@ -375,7 +374,7 @@
 
             <div class="row">
                 <footer
-                    class="d-flex flex-wrap justify-content-between align-items-center  py-3 my-4 border-top fixed-bottom">
+                    class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom">
                     <div class="col-md-4 d-flex align-items-center ms-5 ps-5">
                         <p class="text-muted footer-text">© 2023 SAMT, Gioele Chiodoni</p>
                     </div>
@@ -406,7 +405,7 @@
 
 
 
-    <script src="./../script/save.js"></script>
+    <script src="../script/imageExport.js"></script>
     <script src="./../script/imageImport.js"></script>
 
     <script src="./../script/models/point.js"></script>

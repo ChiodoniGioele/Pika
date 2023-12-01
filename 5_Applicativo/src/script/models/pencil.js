@@ -1,3 +1,9 @@
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ *
+ * La classe permetti di disegnare le linee
+ */
 class Pencil {
 
     constructor(event, color) {
@@ -17,6 +23,10 @@ class Pencil {
         this.startDrawing(event);
     }
 
+    /**
+     * per iniziare a disegnare la linea
+     * @param event inizio del disegno
+     */
     startDrawing(event) {
         canDraw = true;
 
@@ -26,6 +36,11 @@ class Pencil {
         canvasDrawed.moveTo(this.getX(event), this.getY(event));
     }
 
+    /**
+     * per disegnare la linea
+     * @param event coordinata della posizione attuale del mouse
+     * @param canDraw se puo disegnare
+     */
     move(event, canDraw) {
         if (canDraw) {
 
@@ -43,6 +58,11 @@ class Pencil {
         }
     }
 
+    /**
+     * quando finisce di disegnare la linea
+     * @param event posizione del mouse
+     * @returns {boolean} non puo piu disegnare
+     */
     end(event) {
         if (event.button == 0) {
             return false;
@@ -56,6 +76,9 @@ class Pencil {
     }
 
 
+    /**
+     * per ridisegnare la linea
+     */
     reDraw() {
 
         if (this.isSelect) {
@@ -79,10 +102,20 @@ class Pencil {
     }
 
 
+    /**
+     *
+     * @param event posizione del mouse
+     * @returns {number} coordinata x
+     */
     getX(event) {
         return Math.round((event.x - this.canvasBounding.left) * this.scaleX);
     }
 
+    /**
+     *
+     * @param event posizione del mouse
+     * @returns {number} coordinata y
+     */
     getY(event) {
         return Math.round((event.y - this.canvasBounding.top) * this.scaleY);
     }
@@ -90,21 +123,23 @@ class Pencil {
 }
 
 
-
+// quando inizia a disegnare
 canvas.addEventListener("mousedown", function (e) {
+    // se e in modalita per disegnare le linee
     if (pencilMode.checked && !edidtMode.checked) {
         lines.push(new Pencil(e, color));
     }
 });
 
-
+// quando disegna la linea
 canvas.addEventListener("mousemove", function (e) {
+    // se puo disegnare la linea
     if (pencilMode.checked && !edidtMode.checked && lines.length >= 1) {
         lines[lines.length - 1].move(e, canDraw);
     }
 });
 
-
+// quando finisce di disegnare la linea
 canvas.addEventListener("mouseup", function (e) {
     if (pencilMode.checked && !edidtMode.checked && lines.length >= 1) {
         canDraw = lines[lines.length - 1].end(e);

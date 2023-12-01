@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Point{
++ num: int
++ color: string
++ isSelect: boolean
++ dimension: int
++ canvasBoundig
++ scaleX: int
++ scaleY: int
++ x: int
++ y: int
+
++ costructor(event, canvas, numPoint, color)
++ drawPoint(): void
++ reDraw():void
+
+}
+
+
+class Rectangle{
+
++ canvasBoundig
++ startX: int
++ startY:int
++ endX: int
++ endY: int
++ color: string
++ isSelect: boolean
++ dimension: int
+
++ costructor(event, color)
++ move(event, canDraw): void
++ end(): boolean
++ reDraw(): void
++ getX(): int
++ getY(): int
+
+}
+
+
+class Circle{
++ canvasBoundig
++ startX: int
++ startY:int
++ raggio: int
++ color: string
++ isSelect: boolean
++ dimension: int
+
++ costructor(event, color)
++ move(event, canDraw): void
++ end(): boolean
++ reDraw(): void
++ getX(): int
++ getY(): int
+}
+
+class Pencil{
+    + canvasBoundig
+    + arrayX: int[]
+    + arrayY: int[]
+    + color: string
+    + isSelect: boolean
+    + dimension: int
+
+    + startDrawing(event): void
+    + move(event, canvDraw): void
+    + end(event): true
+    + setLineProperties(): void
+    + reDraw(): void
+    + getX(event): int
+    + getY(event): int
+
+}
+
+@enduml

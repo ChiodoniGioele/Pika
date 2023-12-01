@@ -1,14 +1,32 @@
-// on mouse click over canvas
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ * Il file contiene il codice per poter fare delle azioni sui puntini
+ * Azioni come:
+ *  - Selezionare
+ *  - Spostare
+ *  - Elliminare
+ *  - Cambiare colore
+ *  - Cambiare il numero
+ *  - Ridimensionare
+ */
+
 let pointSelected = - 1;
 let canMove = false;
 
+// per selezionare un puntino
 canvas.addEventListener("dblclick", function (e) {
+
     canvasBounding = canvas.getBoundingClientRect();
     scaleX = canvas.width / canvasBounding.width;
     scaleY = canvas.height / canvasBounding.height;
+
+    // se e in modalita modifica dei puntini
     if (pointMode.checked && edidtMode.checked) {
         let pointReturned = getPointClicked(e);
+        // se ritorna un puntino
         if (pointReturned != null) {
+            // se era gia selezionato
             if (pointReturned == pointSelected && isAPointSelected()) {
                 deselectPoint();
                 return;
@@ -18,14 +36,18 @@ canvas.addEventListener("dblclick", function (e) {
     }
 });
 
+// quando viene premuto il pulsante
 canvas.addEventListener("mousedown", function (e) {
+    // se il puntino e selezionato allora si puo muovere
     if (pointMode.checked && edidtMode.checked && isAPointSelected()) {
         canMove = isSamePoint(e, pointSelected);
     }
 });
 
-// se si muove traccia linea
+
+// spostare il puntino
 canvas.addEventListener("mousemove", function (e) {
+    // se si puo muovere
     if (pointMode.checked && edidtMode.checked && canMove && isAPointSelected()) {
         points[pointSelected].x = Math.round((e.x - canvasBounding.left) * scaleX);
         points[pointSelected].y = Math.round((e.y - canvasBounding.top) * scaleY);
@@ -33,7 +55,7 @@ canvas.addEventListener("mousemove", function (e) {
     }
 });
 
-// quando rilasciato finisci di disegnare
+// fine movimento puntino
 canvas.addEventListener("mouseup", function (e) {
     if (pointMode.checked && edidtMode.checked) {
         if (isAPointSelected()) {
@@ -42,12 +64,19 @@ canvas.addEventListener("mouseup", function (e) {
     }
 });
 
+/**
+ * per deselezionare un puntino
+ */
 function deselectPoint() {
     points[pointSelected].isSelect = false;
     pointSelected = - 1;
     reDrawAll();
 }
 
+/**
+ * per selezionare un puntino
+ * @param pointReturned puntino da selezionare
+ */
 function selectThisPoint(pointReturned) {
     deselectAll();
     if (pointSelected >= 0 && pointSelected < points.length) {
@@ -58,6 +87,11 @@ function selectThisPoint(pointReturned) {
     reDrawAll();
 }
 
+/**
+ * Ritorna il puntino che si vuole selezionare
+ * @param event
+ * @returns {number|null}
+ */
 function getPointClicked(event) {
     let x = Math.round((event.x - canvasBounding.left) * scaleX);
     let y = Math.round((event.y - canvasBounding.top) * scaleY);
@@ -69,12 +103,24 @@ function getPointClicked(event) {
     return null;
 }
 
+/**
+ * @param point
+ * @param x
+ * @param y
+ * @returns {number} ritorna la distanza tra un puntino e una coordinata
+ */
 function getDistancePointClick(point, x, y) {
     let distanceX = Math.abs(point.x - x);
     let distanceY = Math.abs(point.y - y);
     return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
 }
 
+/**
+ *
+ * @param event coordinate del click
+ * @param point punto
+ * @returns {boolean} il punto che si cerca di selezionare e lo stesso
+ */
 function isSamePoint(event, point) {
     let x = Math.round((event.x - canvasBounding.left) * scaleX);
     let y = Math.round((event.y - canvasBounding.top) * scaleY);
@@ -85,6 +131,9 @@ function isSamePoint(event, point) {
     }
 }
 
+/**
+ * per elliminare il puntino selezionato
+ */
 function deletePoint() {
     if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         points.splice(points[pointSelected].num - 1, 1);
@@ -96,6 +145,9 @@ function deletePoint() {
     }
 }
 
+/**
+ * per cambiare numero ad un puntino
+ */
 function renamePoint() {
     if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         let newPos = document.getElementById("newNumPoint").value;
@@ -114,6 +166,9 @@ function renamePoint() {
     }
 }
 
+/**
+ * per cambiare il colore ad un puntino
+ */
 function changeColorPoint() {
     if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         let color = document.getElementById("color").value;
@@ -122,6 +177,10 @@ function changeColorPoint() {
     }
 }
 
+/**
+ *
+ * @returns {boolean} se un pntino e selezionato
+ */
 function isAPointSelected() {
     for (var i = 0; i < points.length; i++) {
         if (points[i].isSelect) {
@@ -131,6 +190,9 @@ function isAPointSelected() {
     return false;
 }
 
+/**
+ * per cambiare la dimensione del puntino
+ */
 function changeDimensionPoint(){
     if (isAPointSelected() && pointMode.checked && edidtMode.checked) {
         points[pointSelected].dimension = dimensionRange.value;

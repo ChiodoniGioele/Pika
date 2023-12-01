@@ -1,10 +1,20 @@
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ *
+ * Il file contiene il coodice per salvare le immagini
+ */
+
+
 function openSave(){
     document.getElementById("savePannel").classList.remove("invisible");
     document.getElementById("savePannel").classList.add("visible");
 }
 
-
-function save(){
+/**
+ * Per salvare l'immagine
+ */
+function imageExport(){
     let link = document.createElement('a');
     let name = document.getElementById("nameFile").value;
     let format = document.getElementById("formats").value;

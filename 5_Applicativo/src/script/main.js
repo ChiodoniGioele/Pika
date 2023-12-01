@@ -1,4 +1,12 @@
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ *
+ * Il file contiene il codice per l'interazio con i bottoni, ...
+ *
+ */
 
+// strumenti
 let pointMode = document.getElementById('Point');
 let pencilMode = document.getElementById('Pencil');
 let rectangleMode = document.getElementById('Rectangle');
@@ -6,7 +14,7 @@ let circleMode = document.getElementById('Circle');
 
 let edidtMode = document.getElementById('edit');
 
-
+// layer
 let pointLayer = document.getElementById('PointsLayer');
 let pencilLayer = document.getElementById('LinesLayer');
 let rectLayer = document.getElementById('RectLayer');
@@ -18,7 +26,9 @@ let imgLayer = document.getElementById('ImgLayer');
 let dimensionRange = document.getElementById("dimension");
 
 
-
+/**
+ * In base allo strumento scelto chiama la funzione per elliminare il seguente disegno
+ */
 function deleteElement() {
     if (rectangleMode.checked && edidtMode.checked) {
         deleteRetc();
@@ -31,6 +41,9 @@ function deleteElement() {
     }
 }
 
+/**
+ * In base allo strumeno scelto chiama la funzione per cambiare il colore del disegno
+ */
 function colorElement() {
     if (rectangleMode.checked && edidtMode.checked) {
         changeColorRect();
@@ -45,6 +58,9 @@ function colorElement() {
     }
 }
 
+/**
+ * In base allo strumeno scelto chiama la funzione per cambiare lo spessore del disegno
+ */
 function dimensionElement() {
     if (rectangleMode.checked && edidtMode.checked) {
         changeDimensionRect();
@@ -57,65 +73,8 @@ function dimensionElement() {
     }
 }
 
-function connectDots() {
-    if (points.length > 0) {
-        if (pointLayer.checked) {
-            if (isPointConnect) {
-                isPointConnect = false;
-                reDrawAll();
-            } else {
-                let oldPoint = points[0];
-                for (var point = 1; point < points.length; point++) {
-                    canvasDrawed.beginPath();
-                    canvasDrawed.lineWidth = 3;
-                    canvasDrawed.shadowBlur = 0;
-                    canvasDrawed.shadowColor = null;
-                    canvasDrawed.moveTo(oldPoint.x, oldPoint.y);
-                    canvasDrawed.lineTo(points[point].x, points[point].y);
-                    canvasDrawed.stroke();
-                    oldPoint = points[point];
-                }
 
-                canvasDrawed.beginPath();
-                canvasDrawed.lineWidth = 3;
-                canvasDrawed.shadowBlur = 0;
-                canvasDrawed.shadowColor = null;
-                canvasDrawed.moveTo(points[0].x, points[0].y);
-                canvasDrawed.lineTo(points[points.length - 1].x, points[points.length - 1].y);
-                canvasDrawed.stroke();
-                isPointConnect = true;
-            }
-        }
-    }
-}
-
-function reConnectDots() {
-    if (points.length > 0) {
-        let oldPoint = points[0];
-        for (var point = 1; point < points.length; point++) {
-            canvasDrawed.beginPath();
-            canvasDrawed.lineWidth = 3;
-            canvasDrawed.shadowBlur = 0;
-            canvasDrawed.shadowColor = null;
-            canvasDrawed.moveTo(oldPoint.x, oldPoint.y);
-            canvasDrawed.lineTo(points[point].x, points[point].y);
-            canvasDrawed.stroke();
-            oldPoint = points[point];
-        }
-        canvasDrawed.beginPath();
-        canvasDrawed.lineWidth = 3;
-        canvasDrawed.shadowBlur = 0;
-        canvasDrawed.shadowColor = null;
-        canvasDrawed.moveTo(points[0].x, points[0].y);
-        canvasDrawed.lineTo(points[points.length - 1].x, points[points.length - 1].y);
-        canvasDrawed.stroke();
-        isPointConnect = true;
-    } else {
-        isPointConnect = false;
-    }
-}
-
-
+// layer dei puntini
 function pointLayerCheck() {
     if (!pointLayer.checked) {
         pointMode.disabled = true;
@@ -133,6 +92,7 @@ function pointLayerCheck() {
     reDrawAll();
 }
 
+// layer delle linee
 function linesLayerCheck() {
     if (!pencilLayer.checked) {
         pencilMode.disabled = true;
@@ -143,13 +103,10 @@ function linesLayerCheck() {
     if (pencilMode.checked) {
         pointMode.checked = true;
     }
-
-
-
     reDrawAll();
 }
 
-
+// layer dei rettangoli
 function rectLayerCheck() {
     if (!rectLayer.checked) {
         rectangleMode.disabled = true;
@@ -163,10 +120,10 @@ function rectLayerCheck() {
         pointMode.checked = true;
     }
 
-
     reDrawAll();
 }
 
+// layer dei cerchi
 function circleLayerCheck() {
     if (!circleLayer.checked) {
         circleMode.disabled = true;
@@ -179,12 +136,10 @@ function circleLayerCheck() {
     if (circleMode.checked) {
         pointMode.checked = true;
     }
-
-
-
     reDrawAll();
 }
 
+// layer dell immagine
 function imgLayerView() {
     if (imgLayer.checked) {
         reDrawAll();
@@ -195,15 +150,6 @@ function imgLayerView() {
     }
 }
 
-function deleteAllDraw() {
-    points = new Array();
-    lines = new Array();
-    rects = new Array();
-    circle = new Array();
-    isPointConnect = false;
-    reDrawAll();
-    closeDeleteAll();
-}
 
 function closeDeleteAll(){
     document.getElementById("deleteAllPannel").classList.remove("visible");

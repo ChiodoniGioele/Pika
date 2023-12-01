@@ -1,3 +1,9 @@
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ *
+ * La classe serve per disegnare i rettangoli
+ */
 class Rectangle {
     constructor(event, color) {
         this.canvasBounding = canvas.getBoundingClientRect();
@@ -5,6 +11,7 @@ class Rectangle {
         this.scaleX = canvas.width / this.canvasBounding.width;
         this.scaleY = canvas.height / this.canvasBounding.height;
 
+        // coordinate iniziali del rettangolo
         this.startX = this.getX(event);
         this.startY = this.getY(event);
 
@@ -19,6 +26,11 @@ class Rectangle {
         canvasDrawed.moveTo(this.startX, this.startY);
     }
 
+    /**
+     * Serve per disegnare i rettangoli
+     * @param event posizionde del mouse
+     * @param canDraw se puo disegnare
+     */
     move(event, canDraw) {
         let mouseX = this.getX(event);
         let mouseY = this.getY(event);
@@ -50,10 +62,12 @@ class Rectangle {
         }
     }
 
+    // quando finisce di disegnare il rettangolo
     end() {
         return false;
     }
 
+    // per ridisegnare il rettangolo
     reDraw() {
         if (this.isSelect) {
             canvasDrawed.shadowBlur = 30;
@@ -74,31 +88,43 @@ class Rectangle {
         canvasDrawed.stroke();
     }
 
+    /**
+     *
+     * @param event posizionde del mouse
+     * @returns {number} coordinata x
+     */
     getX(event) {
         return Math.round((event.x - this.canvasBounding.left) * this.scaleX);
     }
 
+    /**
+     *
+     * @param event posizione del mouse
+     * @returns {number} coordinata y
+     */
     getY(event) {
         return Math.round((event.y - this.canvasBounding.top) * this.scaleY);
     }
 }
 
-
+// quando inizia a disegnare il rettangolo
 canvas.addEventListener("mousedown", function (e) {
+    // se e in modalita disegno dei rettangoli
     if (rectangleMode.checked && !edidtMode.checked) {
         rects.push(new Rectangle(e, canvas, color));
     }
 });
 
-
+// quando disegna il rettangolo
 canvas.addEventListener("mousemove", function (e) {
+    // se puo disegnare
     if (rectangleMode.checked && !edidtMode.checked && rects.length >= 1) {
         rects[rects.length - 1].move(e, canDraw);
         reDrawAll();
     }
 });
 
-
+// quando finisce di disegnare il rettangolo
 canvas.addEventListener("mouseup", function (e) {
     if (rectangleMode.checked && !edidtMode.checked && rects.length >= 1) {
         canDraw = rects[rects.length - 1].end();

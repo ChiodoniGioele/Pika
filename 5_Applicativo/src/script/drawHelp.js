@@ -1,29 +1,44 @@
+/**
+ * @author Gioele Chiodoni
+ * @version 24.11.2023
+ *
+ * Il file contiene le funzioni e le variabili usate per disegnare
+ */
+
+// canvas
 let canvas = document.getElementById("canvas");
 let canvasDrawed = canvas.getContext('2d');
 
+// servono per calcolare le coordinate
 let canvasBounding = canvas.getBoundingClientRect();
 let scaleX = canvas.width / canvasBounding.width;
 let scaleY = canvas.height / canvasBounding.height;
 
+// se i puntini sono connessi
 let isPointConnect = false;
 
+// se puo disegnare
 let canDraw = false;    // solo se posso disegnare
 
+// colore del disegno
 let color = "black"
 
-// points array manipolato nel file point.js
+// points array manipolato nel file point.js e actionPoints.js
 var points = new Array(); // array con i puntini
 
-// pencil array manipolato nel file pencil.js
+// pencil array manipolato nel file pencil.js e actionLines.js
 var lines = new Array();
 
-// rectangle array manipolato nel file rectangle.js
+// rectangle array manipolato nel file rectangle.js e actionRects.js
 var rects = new Array();
 
-// circle array manipolato nel file circle.js
+// circle array manipolato nel file circle.js e actionCircle.js
 var circle = new Array();
 
-// ridisegno i punti, linee, rettangoli
+
+/**
+ * Per ridisegnare tutti i disegni ripulendo il canvas
+ */
 function reDrawAll() {
     canvasDrawed.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
     if (pencilLayer.checked) {
@@ -56,6 +71,9 @@ function reDrawAll() {
     }
 }
 
+/**
+ * Per ridisegnare tutti i disegni senza ripulire il canvas
+ */
 function reDrawAllWhidoutClear(){
     if (pencilLayer.checked) {
         for (var i = 0; i < lines.length; i++) {
@@ -87,6 +105,9 @@ function reDrawAllWhidoutClear(){
     }
 }
 
+/**
+ * per deselezionare tutti i disegni
+ */
 function deselectAll(){
     for (var i = 0; i < lines.length; i++) {
         lines[i].isSelect = false;
@@ -116,9 +137,78 @@ function deselectAll(){
 }
 
 
+/**
+ * Per collegare i puntini
+ */
+function connectDots() {
+    if (points.length > 0) {
+        if (pointLayer.checked) {
+            if (isPointConnect) {
+                isPointConnect = false;
+                reDrawAll();
+            } else {
+                let oldPoint = points[0];
+                for (var point = 1; point < points.length; point++) {
+                    canvasDrawed.beginPath();
+                    canvasDrawed.lineWidth = 3;
+                    canvasDrawed.shadowBlur = 0;
+                    canvasDrawed.shadowColor = null;
+                    canvasDrawed.moveTo(oldPoint.x, oldPoint.y);
+                    canvasDrawed.lineTo(points[point].x, points[point].y);
+                    canvasDrawed.stroke();
+                    oldPoint = points[point];
+                }
+
+                canvasDrawed.beginPath();
+                canvasDrawed.lineWidth = 3;
+                canvasDrawed.shadowBlur = 0;
+                canvasDrawed.shadowColor = null;
+                canvasDrawed.moveTo(points[0].x, points[0].y);
+                canvasDrawed.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+                canvasDrawed.stroke();
+                isPointConnect = true;
+            }
+        }
+    }
+}
+
+/**
+ * Per ricollegare i puntini una volta pulito il canvas
+ */
+function reConnectDots() {
+    if (points.length > 0) {
+        let oldPoint = points[0];
+        for (var point = 1; point < points.length; point++) {
+            canvasDrawed.beginPath();
+            canvasDrawed.lineWidth = 3;
+            canvasDrawed.shadowBlur = 0;
+            canvasDrawed.shadowColor = null;
+            canvasDrawed.moveTo(oldPoint.x, oldPoint.y);
+            canvasDrawed.lineTo(points[point].x, points[point].y);
+            canvasDrawed.stroke();
+            oldPoint = points[point];
+        }
+        canvasDrawed.beginPath();
+        canvasDrawed.lineWidth = 3;
+        canvasDrawed.shadowBlur = 0;
+        canvasDrawed.shadowColor = null;
+        canvasDrawed.moveTo(points[0].x, points[0].y);
+        canvasDrawed.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+        canvasDrawed.stroke();
+        isPointConnect = true;
+    } else {
+        isPointConnect = false;
+    }
+}
 
 
-
-
-
-
+// per elliminare tutti i disegni
+function deleteAllDraw() {
+    points = new Array();
+    lines = new Array();
+    rects = new Array();
+    circle = new Array();
+    isPointConnect = false;
+    reDrawAll();
+    closeDeleteAll();
+}
