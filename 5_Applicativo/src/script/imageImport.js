@@ -7,16 +7,11 @@
 // se un immagine e selezionata
 let isImgSelected = false;
 
-function actionVIsibility(){
-    actionsVisible = false;
-    document.getElementById("actions").style.display = false;
-}
-
 let fileInput = document.getElementById('uploadImg');
 
 /**
  * per caricare l'immagine
- * @param event
+ * @param {event} event
  */
 function loadImage(event) {
   if (event.target.files) {
